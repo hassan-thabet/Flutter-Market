@@ -1,16 +1,26 @@
-# flutter_store
+# Flutter Classifieds application
 
-A new Flutter project.
+## Splash screen
+<p align="center">
+  <img src="https://github.com/hassan-thabet/Flutter-Market/blob/master/screenshots/splash.png" width="300" title="first screen">
 
-## Getting Started
+</p>
 
-This project is a starting point for a Flutter application.
+## Login and register
+<p align="center">
+  <img src="https://github.com/hassan-thabet/Flutter-Market/blob/master/screenshots/login.png" width="320" title="first screen">
+  <img src="https://github.com/hassan-thabet/Flutter-Market/blob/master/screenshots/register.png" width="320" title="second screen">
+  <img src="https://github.com/hassan-thabet/Flutter-Market/blob/master/screenshots/error_message.png" width="320" title="second screen">
+</p>
 
-A few resources to get you started if this is your first Flutter project:
+## Home screen & subcategories
+<p align="center">
+  <img src="https://github.com/hassan-thabet/Flutter-Market/blob/master/screenshots/home.png" width="320" title="first screen">
+  <img src="https://github.com/hassan-thabet/Flutter-Market/blob/master/screenshots/subcategories.png" width="320" title="second screen">
+</p>
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+## Created By
+- dev.7assan@hotmail.com 
+- +2001023668557 
