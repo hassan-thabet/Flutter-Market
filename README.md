@@ -8,9 +8,14 @@
 
 ## Login and register
 <p align="center">
-  <img src="https://github.com/hassan-thabet/Flutter-Market/blob/master/screenshots/login.png" width="320" title="first screen">
-  <img src="https://github.com/hassan-thabet/Flutter-Market/blob/master/screenshots/register.png" width="320" title="second screen">
-  <img src="https://github.com/hassan-thabet/Flutter-Market/blob/master/screenshots/error_message.png" width="320" title="second screen">
+  <img src="https://github.com/hassan-thabet/Flutter-Market/blob/master/screenshots/login.png" width="290" title="first screen">
+  <img src="https://github.com/hassan-thabet/Flutter-Market/blob/master/screenshots/register.png" width="290" title="second screen">
+</p>
+
+## error message
+<p align="center">
+
+  <img src="https://github.com/hassan-thabet/Flutter-Market/blob/master/screenshots/error_message.png" width="290" title="second screen">
 </p>
 
 ## Home screen & subcategories
