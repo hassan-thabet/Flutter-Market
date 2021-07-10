@@ -7,8 +7,8 @@ import 'package:flutter_store/utilities/api_helper.dart';
 class BrandsApi {
   Map<String, String> headers = {'Accept': 'application/json'};
 
-  Future<List<Brand>> fetchBrands() async {
-    String url = ApiHelper.BRANDS;
+  Future<List<Brand>> fetchBrands(String categoriId) async {
+    String url = ApiHelper.BRANDS + '/' + categoriId;
     http.Response response = await http.get(url, headers: headers);
 
     switch (response.statusCode) {

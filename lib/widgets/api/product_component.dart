@@ -11,12 +11,12 @@ Widget productComponent(Product product) {
     child: Container(
        width: 220,
       child: Column(
-        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Stack(
             children: [
 
-              Image.network(ApiHelper.MAIN_IMAGES_URL + product.images[0] , height: 200 ,width: double.infinity,),
+              Image.network(ApiHelper.MAIN_IMAGES_URL + product.images[0] , height: 200 ,width: double.infinity),
               Align(
                   alignment: Alignment.topRight,
                   child: TextButton(

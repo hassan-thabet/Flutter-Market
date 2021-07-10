@@ -144,68 +144,6 @@ class _HomeTabState extends State<HomeTab> {
               SizedBox(
                 height: 20,
               ),
-              // brands text
-              Padding(
-                padding: const EdgeInsets.only(left: 18),
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    'Brands',
-                    style: TextStyle(
-                      color: AppColors.M_semi_dark_text_color,
-                      decoration: TextDecoration.none,
-                      fontFamily: 'Quicksand',
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: height / 50,
-              ),
-              // brands horizontal list view
-              Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                  child: Container(
-                    height: 80,
-                    width: width,
-                    child: FutureBuilder(
-                        future: brandsApi.fetchBrands(),
-                        builder: (BuildContext context,
-                            AsyncSnapshot<List<Brand>> snapShot) {
-                          switch (snapShot.connectionState) {
-                            case ConnectionState.none:
-                              return error('nothing happened');
-                              break;
-                            case ConnectionState.waiting:
-                              return loading();
-                              break;
-                            case ConnectionState.active:
-                              return loading();
-                              break;
-                            case ConnectionState.done:
-                              if (snapShot.hasError) {
-                                return error(snapShot.error.toString());
-                              } else {
-                                if (!snapShot.hasData) {
-                                  return error('No data is recorded on DB');
-                                } else {
-                                  return ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: snapShot.data.length,
-                                      itemBuilder: (context, position) {
-                                        return GestureDetector(
-                                            onTap: () {},
-                                            child: brandComponent(
-                                                snapShot.data[position]));
-                                      });
-                                }
-                              }
-                          }
-                          return Container();
-                        }),
-                  )),
               SizedBox(
                 height: 20,
               ),

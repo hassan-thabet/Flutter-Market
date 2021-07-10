@@ -10,9 +10,8 @@ class ApiHelper {
   static const String AUTH_REGISTER = MAIN_API_URL + 'auth/register';
 
   static const String CATEGORIES = MAIN_API_URL + 'categories';
-  static const String SUBCATEGORIES = MAIN_API_URL + 'subcategories';
-
-  static const String BRANDS = MAIN_API_URL + 'brands';
+  static const String SUBCATEGORIES = MAIN_API_URL + 'category-subcategories';
+  static const String BRANDS = MAIN_API_URL + 'category-brands';
 
   static const String PRODUCTS = MAIN_API_URL + 'products';
 

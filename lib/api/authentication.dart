@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_store/exceptions/exceptions.dart';
 import 'package:flutter_store/models/user.dart';
 import 'package:flutter_store/utilities/api_helper.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import 'dart:async';
@@ -15,11 +16,8 @@ import 'dart:convert';
   };
   var status;
 
-
   Future<User> login(String email, String password) async {
     Map<String, String> body = {'email': email, 'password': password};
-
-
       http.Response response = await http.post(
         ApiHelper.AUTH_LOGIN,
         headers: headers,
@@ -38,6 +36,7 @@ import 'dart:convert';
       case 200:
         var body = convert.jsonDecode(response.body);
         print(body);
+        _saveAuth(true);
         return User.fromJson(data);
         break;
 
@@ -52,13 +51,7 @@ import 'dart:convert';
   }
 
 
-
-  Future<User> register(
-      String firstName , String lastName,
-      String email ,
-      String password ,
-
-      ) async {
+  Future<User> register(String firstName , String lastName, String email , String password ,) async {
     FormData body =
     new FormData.fromMap({
       "first_name" : firstName,
@@ -97,4 +90,12 @@ import 'dart:convert';
     }
   }
 
+
+
+  _saveAuth(bool isAuth) async {
+    final preferences = await SharedPreferences.getInstance();
+    final key = 'authenticated';
+    final value = isAuth;
+    preferences.setBool(key, value);
+  }
  }
