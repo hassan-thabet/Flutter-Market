@@ -7,10 +7,13 @@ import 'package:flutter_store/constants/app_color.dart';
 import 'package:flutter_store/models/brand.dart';
 import 'package:flutter_store/models/category.dart';
 import 'package:flutter_store/models/subcategory.dart';
+import 'package:flutter_store/screens/ProductsScreens/subcategory_products_screen.dart';
 import 'package:flutter_store/widgets/api/brand_component.dart';
 import 'package:flutter_store/widgets/api/subcategory_component.dart';
 import 'package:flutter_store/widgets/connection/error.dart';
 import 'package:flutter_store/widgets/connection/loading.dart';
+
+import 'ProductsScreens/brand_products.dart';
 
 class CategoryScreen extends StatefulWidget {
   final Category category;
@@ -26,11 +29,25 @@ class CategoryScreen extends StatefulWidget {
   BrandsApi brandsApi = BrandsApi();
 
 
+
+
+
 class _CategoryScreenState extends State<CategoryScreen> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+
+    void _goToSubcategoryProductsScreen(Subcategory subcategory, BuildContext context) {
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return SubcategoryProductsScreen(subcategory: subcategory);
+      }));
+    }
+    void _goToBrandProductsScreen(Brand brand, BuildContext context) {
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return BrandProductsScreen(brand: brand);
+      }));
+    }
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(
@@ -59,7 +76,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: Text(
-                    'Shop by Brands',
+                    'Official Stores',
                     style: TextStyle(
                       color: AppColors.M_semi_dark_text_color,
                       decoration: TextDecoration.none,
@@ -104,7 +121,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                       itemCount: snapShot.data!.length,
                                       itemBuilder: (context, position) {
                                         return GestureDetector(
-                                            onTap: () {},
+                                            onTap: () {
+                                              _goToBrandProductsScreen( snapShot.data![position] , context );
+                                            },
                                             child: brandComponent(
                                                 snapShot.data![position]));
                                       });
@@ -116,7 +135,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
 
               SizedBox(
-                height: height / 50,
+                height: height / 20,
               ),
 
 
@@ -126,7 +145,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: Text(
-                    'Subcategories',
+                    'Shop by subcategories',
                     style: TextStyle(
                       color: AppColors.M_semi_dark_text_color,
                       decoration: TextDecoration.none,
@@ -172,6 +191,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                       shrinkWrap: true,
                                       itemBuilder: (context, position) {
                                         return GestureDetector(
+                                          onTap: () {
+                                            _goToSubcategoryProductsScreen(
+                                              snapShot.data![position],
+                                              context);
+                                        },
                                             child: subcategoryComponent(snapShot.data![position])
                                         );
                                       }

@@ -14,6 +14,8 @@ class ApiHelper {
   static const String BRANDS = MAIN_API_URL + 'category-brands';
 
   static const String PRODUCTS = MAIN_API_URL + 'products';
+  static const String SUBCATEGORY_PRODUCTS = MAIN_API_URL + 'subcategories';
+  static const String BRAND_PRODUCTS = MAIN_API_URL + 'brands';
 
 
 

@@ -73,7 +73,6 @@ class _HomeTabState extends State<HomeTab> {
               SizedBox(
                 height: height / 50,
               ),
-              // Categories Text
               Padding(
                 padding: const EdgeInsets.only(left: 22.0),
                 child: Align(
@@ -93,7 +92,6 @@ class _HomeTabState extends State<HomeTab> {
               SizedBox(
                 height: height / 50,
               ),
-              // categories horizontal list view
               Padding(
                   padding: const EdgeInsets.only(left: 18),
                   child: Container(
@@ -139,17 +137,14 @@ class _HomeTabState extends State<HomeTab> {
                         }),
                   )),
               SizedBox(
-                height: 20,
-              ),
-              SizedBox(
-                height: 20,
+                height: 40,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 18),
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: Text(
-                    'Products',
+                    'Recently arrived',
                     style: TextStyle(
                       color: AppColors.M_semi_dark_text_color,
                       decoration: TextDecoration.none,
@@ -166,7 +161,7 @@ class _HomeTabState extends State<HomeTab> {
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 18.0),
                   child: Container(
-                    height: 360,
+                     height: 360,
                     width: width,
                     child: FutureBuilder(
                         future: productsApi.fetchProducts(),
