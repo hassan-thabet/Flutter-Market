@@ -8,8 +8,7 @@ class SubcategoriesApi {
   Map<String, String> headers = {'Accept': 'application/json',};
 
   Future<List<Subcategory>> fetchSubcategories(String categoryId) async {
-    String url = ApiHelper.SUBCATEGORIES + '/' + categoryId;
-    http.Response response = await http.get(url, headers: headers);
+    http.Response response = await http.get(Uri.parse(ApiHelper.SUBCATEGORIES + '/' + categoryId), headers: headers);
 
     switch (response.statusCode) {
       case 200:
@@ -19,15 +18,15 @@ class SubcategoriesApi {
           subcategory.add(Subcategory.fromJson(item));
         }
         return subcategory;
-        break;
+
 
       case 404:
         throw ResourcesNotFound('Products');
-        break;
+
 
       default:
-        return null;
-        break;
+        return throw('Error');
+
     }
   }
 }

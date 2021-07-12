@@ -19,7 +19,7 @@ import 'dart:convert';
   Future<User> login(String email, String password) async {
     Map<String, String> body = {'email': email, 'password': password};
       http.Response response = await http.post(
-        ApiHelper.AUTH_LOGIN,
+        Uri.parse(ApiHelper.AUTH_LOGIN),
         headers: headers,
         body: body,
       );
@@ -35,18 +35,21 @@ import 'dart:convert';
     switch (response.statusCode) {
       case 200:
         var body = convert.jsonDecode(response.body);
-        print(body);
+        var data = body['data'];
+        User? user = User.fromJson(data);
+
         _saveAuth(true);
-        return User.fromJson(data);
-        break;
+        await _saveUserData(user.id , user.apiToken , user.email , user.firstName , user.lastName);
+        return user;
+
 
       case 401:
         throw LoginField('Credentials Rejected');
-        break;
+
 
       default:
-        return null;
-        break;
+        return throw('Credentials Rejected');
+
     }
   }
 
@@ -75,18 +78,18 @@ import 'dart:convert';
         var body = response.data;
         print(body);
 
-        return null;
-        break;
+        return body;
+
 
       case 422:
         throw MissingFields();
-        break;
+
       case 500:
         throw LoginField('Sign Up Field');
-        break;
+
       default:
-        return null;
-        break;
+        return throw('Sign Up Field');
+
     }
   }
 
@@ -97,5 +100,16 @@ import 'dart:convert';
     final key = 'authenticated';
     final value = isAuth;
     preferences.setBool(key, value);
+  }
+
+  Future<void> _saveUserData (int? id , String? apiToken, String? firstName , String? lastName , String? email) async {
+    final preferences = await SharedPreferences.getInstance();
+    preferences.setInt('user_id', id!);
+    preferences.setString('api_token', apiToken!);
+    preferences.setString('first_name', firstName!);
+    preferences.setString('last_name', lastName!);
+    preferences.setString('email', email!);
+    // preferences.setString('image', image!);
+    print('ID is $id  and its saved in shared preferences in key user_id');
   }
  }

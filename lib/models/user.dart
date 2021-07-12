@@ -1,12 +1,7 @@
 class User{
 
-  int id;
-  String firstName;
-  String lastName;
-  String email;
-  String phoneNumber;
-  String image;
-  String apiToken;
+  int? id , phoneNumber;
+  String? firstName , lastName , email , image , apiToken;
 
   User(
       this.id,

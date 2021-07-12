@@ -1,7 +1,7 @@
 
 class Subcategory{
-  int id , categoryId ;
-  String subcategoryName , imageLink;
+  int? id , categoryId ;
+  String? subcategoryName , imageLink;
 
   Subcategory(
       this.id, this.categoryId, this.subcategoryName, this.imageLink);

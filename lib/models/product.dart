@@ -1,8 +1,8 @@
 class Product {
-  int id, subcategoryId;
-  String title, description, type, status;
-  double price;
-  List<String> images;
+  int? id, subcategoryId;
+  String? title, description, type, status;
+  double? price;
+  List<String>? images;
 
   Product(this.id, this.price, this.subcategoryId, this.title,
       this.description, this.type, this.status, this.images);
@@ -22,7 +22,7 @@ class Product {
     if (jsonImages.length > 0) {
       for (var image in jsonImages) {
         if (images != null) {
-          this.images.add(image['path']);
+          this.images!.add(image['path']);
         }
       }
     }

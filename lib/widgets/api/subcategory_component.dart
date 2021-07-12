@@ -9,7 +9,7 @@ Widget subcategoryComponent(Subcategory subcategory) {
       tileColor: Colors.white,
       leading: Icon(Icons.auto_awesome_mosaic_outlined),
       title: Text(
-        subcategory.subcategoryName,
+        subcategory.subcategoryName!,
         style: TextStyle(
           color: AppColors.M_dark_text_color ,
           fontFamily: 'Quicksand',

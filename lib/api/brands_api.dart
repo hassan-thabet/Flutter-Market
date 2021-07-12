@@ -7,9 +7,9 @@ import 'package:flutter_store/utilities/api_helper.dart';
 class BrandsApi {
   Map<String, String> headers = {'Accept': 'application/json'};
 
-  Future<List<Brand>> fetchBrands(String categoriId) async {
-    String url = ApiHelper.BRANDS + '/' + categoriId;
-    http.Response response = await http.get(url, headers: headers);
+  Future<List<Brand>> fetchBrands(String categoryId) async {
+
+    http.Response response = await http.get(Uri.parse(ApiHelper.BRANDS + '/' + categoryId), headers: headers);
 
     switch (response.statusCode) {
       case 200:
@@ -19,11 +19,11 @@ class BrandsApi {
           brand.add(Brand.fromJson(item));
         }
         return brand;
-        break;
+
 
       default:
-        return null;
-        break;
+        return throw('Error');
+
     }
   }
 }

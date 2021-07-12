@@ -3,8 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_store/constants/app_color.dart';
 
-class Consts {
-  Consts._();
+class Constants {
+  Constants._();
 
   static const double padding = 16.0;
   static const double avatarRadius = 45.0;
@@ -13,12 +13,16 @@ class Consts {
 
 class CustomDialog extends StatelessWidget {
   final String title, description, buttonText;
-  final Icon icon;
+  final Icon? icon;
+  final VoidCallback buttonFunc;
+
+
 
   CustomDialog({
-    @required this.title,
-    @required this.description,
-    @required this.buttonText,
+    required this.title,
+    required this.description,
+    required this.buttonText,
+    required this.buttonFunc,
     this.icon,
   });
 
@@ -26,7 +30,7 @@ class CustomDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(Consts.padding),
+        borderRadius: BorderRadius.circular(Constants.padding),
       ),
       elevation: 0.0,
       backgroundColor: Colors.transparent,
@@ -39,16 +43,16 @@ class CustomDialog extends StatelessWidget {
       children: <Widget>[
         Container(
           padding: EdgeInsets.only(
-            top: Consts.avatarRadius + Consts.padding,
-            bottom: Consts.padding,
-            left: Consts.padding,
-            right: Consts.padding,
+            top: Constants.avatarRadius + Constants.padding,
+            bottom: Constants.padding,
+            left: Constants.padding,
+            right: Constants.padding,
           ),
-          margin: EdgeInsets.only(top: Consts.avatarRadius),
+          margin: EdgeInsets.only(top: Constants.avatarRadius),
           decoration: new BoxDecoration(
             color: Colors.white,
             shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.circular(Consts.padding),
+            borderRadius: BorderRadius.circular(Constants.padding),
             boxShadow: [
               BoxShadow(
                 color: Colors.black26,
@@ -86,9 +90,7 @@ class CustomDialog extends StatelessWidget {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop(); // To close the dialog
-                  },
+                  onPressed: buttonFunc,
                   child: Text(
                       buttonText,
                     style: TextStyle(
@@ -106,11 +108,11 @@ class CustomDialog extends StatelessWidget {
         ),
 
         Positioned(
-          left: Consts.padding,
-          right: Consts.padding,
+          left: Constants.padding,
+          right: Constants.padding,
           child: CircleAvatar(
             backgroundColor: AppColors.M_app_main_color,
-            radius: Consts.avatarRadius,
+            radius: Constants.avatarRadius,
             child: icon,
           ),
         ),

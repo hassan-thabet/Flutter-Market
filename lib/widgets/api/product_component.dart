@@ -1,9 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_store/constants/app_color.dart';
 import 'package:flutter_store/models/product.dart';
 import 'package:flutter_store/utilities/api_helper.dart';
+import 'package:flutter_store/widgets/components/rate_bar.dart';
 
 Widget productComponent(Product product) {
 
@@ -15,8 +15,7 @@ Widget productComponent(Product product) {
         children: <Widget>[
           Stack(
             children: [
-
-              Image.network(ApiHelper.MAIN_IMAGES_URL + product.images[0] , height: 200 ,width: double.infinity),
+              Image.network(ApiHelper.MAIN_IMAGES_URL + product.images![0] , height: 200 ,width: double.infinity),
               Align(
                   alignment: Alignment.topRight,
                   child: TextButton(
@@ -25,11 +24,12 @@ Widget productComponent(Product product) {
               ),
             ],
           ),
+
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Align(
               child: Text(
-                product.type,
+                product.type!,
                 style: TextStyle(
                   color: Colors.black,
                   fontFamily: 'Quicksand',
@@ -41,7 +41,7 @@ Widget productComponent(Product product) {
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Align(
               child: Text(
-                product.title,
+                product.title!,
                 maxLines: 2,
                 style: TextStyle(
                   color: Colors.black,
@@ -69,15 +69,7 @@ Widget productComponent(Product product) {
                       fontFamily: 'Quicksand',
                     ),
                   ),
-                  Row(
-                    children: [
-                      Icon(Icons.star , color: Colors.amberAccent, size: 20,),
-                      Icon(Icons.star, color: Colors.amberAccent,size: 20,),
-                      Icon(Icons.star, color: Colors.amberAccent,size: 20,),
-                      Icon(Icons.star_half, color: Colors.amberAccent,size: 20,),
-                      Icon(Icons.star_border, color: Colors.amberAccent , size: 20),
-                    ],
-                  ),
+                  RateBar(),
                 ],
               ),
             ),

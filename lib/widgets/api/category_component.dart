@@ -11,13 +11,13 @@ Widget categoryComponent(Category category) {
           child: CircleAvatar(
             backgroundColor: Colors.white,
             radius: 45,
-            child: Image.network(category.imageLink , width: 45, height: 45, color: AppColors.M_app_main_color),
+            child: Image.network(category.imageLink! , width: 45, height: 45, color: AppColors.M_app_main_color),
             // backgroundImage: NetworkImage(category.imageLink),
           ),
         ),
         SizedBox(height: 5),
         Text(
-          category.categoryName,
+          category.categoryName!,
           style : TextStyle(
           fontFamily: 'Quicksand')
           ),

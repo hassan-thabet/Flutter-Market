@@ -1,8 +1,8 @@
 
 class Category{
 
-  int id;
-  String categoryName , imageLink;
+  int? id;
+  String? categoryName , imageLink;
 
   Category(this.id, this.categoryName , this.imageLink);
 

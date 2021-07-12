@@ -54,6 +54,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   color: Colors.white,
                                   size: 40,
                                 ),
+                                buttonFunc: (){
+                                  Navigator.of(context).pop();
+                                },
                               ),
                         ),
                         isLoading = false,
@@ -72,6 +75,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               color: Colors.white,
                               size: 40,
                             ),
+                            buttonFunc: (){
+                              Navigator.of(context).pop();
+                            },
                           ),
                         ),
                         isLoading = false,
@@ -90,6 +96,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 color: Colors.white,
                 size: 40,
               ),
+              buttonFunc: (){
+                Navigator.of(context).pop();
+              },
             ),
           );
         }

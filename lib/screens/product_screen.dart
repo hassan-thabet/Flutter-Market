@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_store/constants/app_color.dart';
 import 'package:flutter_store/models/product.dart';
+import 'package:flutter_store/screens/login_screen.dart';
 import 'package:flutter_store/utilities/api_helper.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_store/widgets/components/custom_dialog.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProductScreen extends StatefulWidget {
   final Product product;
 
-  const ProductScreen({Key key, this.product}) : super(key: key);
+  ProductScreen({Key? key,required this.product}) : super(key: key);
 
   @override
   _ProductScreenState createState() => _ProductScreenState();
@@ -15,23 +18,60 @@ class ProductScreen extends StatefulWidget {
 
 class _ProductScreenState extends State<ProductScreen> {
   int _currentImage = 0;
-  int _selectedTabbar = 0;
+  int _selectedTabBar = 0;
   final CarouselController _controller = CarouselController();
+
+  read() async
+  {
+    final preferences = await SharedPreferences.getInstance();
+    final key = 'user_id';
+    final value = preferences.get(key) ?? null;
+    if (value != null)
+    {
+      print('I\'am a user and my id is $value');
+    }else
+    {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => CustomDialog(
+          title: "you are not authorized",
+          description: "To use the shopping cart you must be logged in",
+          buttonText: "Login",
+          icon: Icon(
+            Icons.person_add_alt_1_outlined,
+            color: Colors.white,
+            size: 40,
+          ),
+          buttonFunc: (){
+            Navigator.of(context).pushNamed(LoginScreen.id); // To close the dialog
+          },
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
+
     double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
       backgroundColor: Colors.white,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: AppColors.M_app_main_color,
+        onPressed: ()
+        {
+          read();
+        },
+        child: Icon(Icons.add_shopping_cart_rounded , color: Colors.white,),
+      ),
       appBar: AppBar(
         iconTheme: IconThemeData(
           color: AppColors.M_icons_color, //change your color here
         ),
         centerTitle: false,
         title: Text(
-          widget.product.title,
+          widget.product.title!,
           style: TextStyle(
             color: AppColors.M_dark_text_color,
             fontFamily: 'Quicksand',
@@ -59,18 +99,18 @@ class _ProductScreenState extends State<ProductScreen> {
                         }),
                     items: <Widget>[
                       for (var index = 0;
-                          index < widget.product.images.length;
+                          index < widget.product.images!.length;
                           index++)
                         Image.network(
                           ApiHelper.MAIN_IMAGES_URL +
-                              widget.product.images[index],
+                              widget.product.images![index],
                           height: height / 3,
                         ),
                     ]),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: widget.product.images.asMap().entries.map((entry) {
+                children: widget.product.images!.asMap().entries.map((entry) {
                   return GestureDetector(
                     onTap: () => _controller.animateToPage(entry.key),
                     child: Container(
@@ -91,7 +131,7 @@ class _ProductScreenState extends State<ProductScreen> {
               Align(
                 alignment: Alignment.topLeft,
                 child: Text(
-                  widget.product.title,
+                  widget.product.title!,
                   style: TextStyle(
                     fontSize: 22,
                     color: AppColors.M_dark_text_color,
@@ -138,7 +178,7 @@ class _ProductScreenState extends State<ProductScreen> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
-                    widget.product.type,
+                    widget.product.type!,
                     style: TextStyle(
                       fontSize: 20,
                       color: AppColors.M_dark_text_color,
@@ -177,7 +217,7 @@ class _ProductScreenState extends State<ProductScreen> {
                         child: TabBar(
                           onTap: (index) {
                             setState(() {
-                              _selectedTabbar = index;
+                              _selectedTabBar = index;
                             });
                           },
                           tabs: [
@@ -205,61 +245,70 @@ class _ProductScreenState extends State<ProductScreen> {
                         height: 15,
                       ),
                       Builder(builder: (_) {
-                        if (_selectedTabbar == 0) {
-                          return Column(
-                            children: [
-                              SizedBox(
-                                height: 15,
-                              ),
-                              Align(
-                                alignment: Alignment.topLeft,
-                                child: Text(
-                                  'Product description',
-                                  style: TextStyle(
-                                    fontSize: 22,
-                                    color: AppColors.M_dark_text_color,
-                                    fontFamily: 'Quicksand',
+                        if (_selectedTabBar == 0) {
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 70),
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Text(
+                                    'Product description',
+                                    style: TextStyle(
+                                      fontSize: 22,
+                                      color: AppColors.M_dark_text_color,
+                                      fontFamily: 'Quicksand',
+                                    ),
                                   ),
                                 ),
-                              ),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              Align(
-                                alignment: Alignment.topLeft,
-                                child: Text(
-                                  widget.product.description,
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    color: AppColors.M_dark_text_color,
-                                    fontFamily: 'Quicksand',
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Text(
+                                    widget.product.description!,
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      color: AppColors.M_dark_text_color,
+                                      fontFamily: 'Quicksand',
+                                    ),
                                   ),
                                 ),
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                            ],
+                                SizedBox(
+                                  height: 20,
+                                ),
+                              ],
+                            ),
                           );
-                        } else if (_selectedTabbar == 1) {
-                          return Center(
-                            child: Text(
-                              'Product details',
-                              style: TextStyle(
-                                fontSize: 22,
-                                color: AppColors.M_dark_text_color,
-                                fontFamily: 'Quicksand',
+                        } else if (_selectedTabBar == 1) {
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 70),
+                            child: Center(
+                              child: Text(
+                                'Product details',
+                                style: TextStyle(
+                                  fontSize: 22,
+                                  color: AppColors.M_dark_text_color,
+                                  fontFamily: 'Quicksand',
+                                ),
                               ),
                             ),
                           ); //2nd tabView
                         } else {
-                          return Center(
-                            child: Text(
-                              'Product reviews',
-                              style: TextStyle(
-                                fontSize: 22,
-                                color: AppColors.M_dark_text_color,
-                                fontFamily: 'Quicksand',
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 70),
+                            child: Center(
+                              child: Text(
+                                'Product reviews',
+                                style: TextStyle(
+                                  fontSize: 22,
+                                  color: AppColors.M_dark_text_color,
+                                  fontFamily: 'Quicksand',
+                                ),
                               ),
                             ),
                           );
@@ -267,35 +316,6 @@ class _ProductScreenState extends State<ProductScreen> {
                       }),
                     ],
                   )),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20.0),
-                child: TextButton(
-                  style: ButtonStyle(
-                    padding: MaterialStateProperty.all(
-                        EdgeInsets.symmetric(vertical: height / 55)),
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        AppColors.M_app_main_color),
-                    minimumSize: MaterialStateProperty.all(
-                        Size(width / 10 * 9, height * 0.0580)),
-                    shape: MaterialStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                    ),
-                  ),
-                  onPressed: () {},
-                  child: Text(
-                    "add to cart".toUpperCase(),
-                    style: TextStyle(
-                      color: Colors.white,
-                      decoration: TextDecoration.none,
-                      fontFamily: 'Quicksand',
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-              ),
             ],
           ),
         ),

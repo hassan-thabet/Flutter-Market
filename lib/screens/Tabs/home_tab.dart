@@ -3,10 +3,8 @@ import 'package:flutter_store/api/brands_api.dart';
 import 'package:flutter_store/api/categories_api.dart';
 import 'package:flutter_store/api/products_api.dart';
 import 'package:flutter_store/constants/app_color.dart';
-import 'package:flutter_store/models/brand.dart';
 import 'package:flutter_store/models/category.dart';
 import 'package:flutter_store/models/product.dart';
-import 'package:flutter_store/widgets/api/brand_component.dart';
 import 'package:flutter_store/widgets/api/category_component.dart';
 import 'package:flutter_store/widgets/api/product_component.dart';
 import 'package:flutter_store/widgets/connection/error.dart';
@@ -34,6 +32,7 @@ class _HomeTabState extends State<HomeTab> {
         return CategoryScreen(category: category);
       }));
     }
+
     void _goToProductScreen(Product product, BuildContext context) {
       Navigator.push(context, MaterialPageRoute(builder: (context) {
         return ProductScreen(product: product);
@@ -71,7 +70,6 @@ class _HomeTabState extends State<HomeTab> {
         children: [
           Column(
             children: [
-
               SizedBox(
                 height: height / 50,
               ),
@@ -108,13 +106,13 @@ class _HomeTabState extends State<HomeTab> {
                           switch (snapShot.connectionState) {
                             case ConnectionState.none:
                               return error('nothing happened');
-                              break;
+
                             case ConnectionState.waiting:
                               return loading();
-                              break;
+
                             case ConnectionState.active:
                               return loading();
-                              break;
+
                             case ConnectionState.done:
                               if (snapShot.hasError) {
                                 return error(snapShot.error.toString());
@@ -124,21 +122,20 @@ class _HomeTabState extends State<HomeTab> {
                                 } else {
                                   return ListView.builder(
                                       scrollDirection: Axis.horizontal,
-                                      itemCount: snapShot.data.length,
+                                      itemCount: snapShot.data!.length,
                                       itemBuilder: (context, position) {
                                         return GestureDetector(
                                             onTap: () {
                                               _goToCategoryScreen(
-                                                  snapShot.data[position],
+                                                  snapShot.data![position],
                                                   context);
                                             },
                                             child: categoryComponent(
-                                                snapShot.data[position]));
+                                                snapShot.data![position]));
                                       });
                                 }
                               }
                           }
-                          return Container();
                         }),
                   )),
               SizedBox(
@@ -178,13 +175,13 @@ class _HomeTabState extends State<HomeTab> {
                           switch (snapShot.connectionState) {
                             case ConnectionState.none:
                               return error('nothing happened');
-                              break;
+
                             case ConnectionState.waiting:
                               return loading();
-                              break;
+
                             case ConnectionState.active:
                               return loading();
-                              break;
+
                             case ConnectionState.done:
                               if (snapShot.hasError) {
                                 return error(snapShot.error.toString());
@@ -194,26 +191,25 @@ class _HomeTabState extends State<HomeTab> {
                                 } else {
                                   return ListView.builder(
                                       scrollDirection: Axis.horizontal,
-                                      itemCount: snapShot.data.length,
+                                      itemCount: snapShot.data!.length,
                                       itemBuilder: (context, position) {
                                         return GestureDetector(
                                             onTap: () {
                                               _goToProductScreen(
-                                                  snapShot.data[position],
+                                                  snapShot.data![position],
                                                   context);
                                             },
                                             child: productComponent(
-                                                snapShot.data[position]));
+                                                snapShot.data![position]));
                                       });
                                 }
                               }
                           }
-                          return Container();
                         }),
                   )),
-              SizedBox(
-                height: height / 3,
-              ),
+              // SizedBox(
+              //   height: height / 3,
+              // ),
             ],
           ),
         ],

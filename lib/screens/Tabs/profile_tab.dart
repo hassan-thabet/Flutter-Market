@@ -14,6 +14,8 @@ class _ProfileTabState extends State<ProfileTab> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
+
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
@@ -52,11 +54,13 @@ class _ProfileTabState extends State<ProfileTab> {
                       backgroundImage: NetworkImage('https://i.im.ge/2021/07/05/ufuEW.jpg')
                     ),
                     SizedBox(width: width / 15,),
+
+
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Hassan Thabet',
+                          'hassanThabet',
                           style: TextStyle(
                             color: AppColors.M_semi_dark_text_color,
                             decoration: TextDecoration.none,

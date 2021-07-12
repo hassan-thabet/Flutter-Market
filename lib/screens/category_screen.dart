@@ -15,7 +15,8 @@ import 'package:flutter_store/widgets/connection/loading.dart';
 class CategoryScreen extends StatefulWidget {
   final Category category;
 
-  const CategoryScreen({Key key, this.category}) : super(key: key);
+
+  CategoryScreen({Key? key, required this.category}) : super(key: key);
 
   @override
   _CategoryScreenState createState() => _CategoryScreenState();
@@ -37,7 +38,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
         ),
         centerTitle: true,
         title: Text(
-          widget.category.categoryName ,
+          widget.category.categoryName! ,
           style: TextStyle(
             color: AppColors.M_dark_text_color ,
             fontFamily: 'Quicksand',
@@ -48,7 +49,6 @@ class _CategoryScreenState extends State<CategoryScreen> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          //height: height,
           width: width,
           child: Column(
             children: [
@@ -85,33 +85,32 @@ class _CategoryScreenState extends State<CategoryScreen> {
                           switch (snapShot.connectionState) {
                             case ConnectionState.none:
                               return error('nothing happened');
-                              break;
+
                             case ConnectionState.waiting:
                               return loading();
-                              break;
+
                             case ConnectionState.active:
                               return loading();
-                              break;
+
                             case ConnectionState.done:
                               if (snapShot.hasError) {
                                 return error(snapShot.error.toString());
                               } else {
-                                if (snapShot.data.length < 1) {
+                                if (snapShot.data!.length < 1) {
                                   return error('Some brands will be included soon');
                                 } else {
                                   return ListView.builder(
                                       scrollDirection: Axis.horizontal,
-                                      itemCount: snapShot.data.length,
+                                      itemCount: snapShot.data!.length,
                                       itemBuilder: (context, position) {
                                         return GestureDetector(
                                             onTap: () {},
                                             child: brandComponent(
-                                                snapShot.data[position]));
+                                                snapShot.data![position]));
                                       });
                                 }
                               }
                           }
-                          return Container();
                         }),
                   )),
 
@@ -144,21 +143,22 @@ class _CategoryScreenState extends State<CategoryScreen> {
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 18.0),
                   child: Container(
-                    //height: height,
+
                     width: width,
                     child:   FutureBuilder(
                         future: subcategoriesApi.fetchSubcategories(widget.category.id.toString()),
                         builder: (BuildContext context , AsyncSnapshot<List<Subcategory>> snapShot){
+
                           switch(snapShot.connectionState) {
                             case ConnectionState.none:
                               return error('nothing happened');
-                              break;
+
                             case ConnectionState.waiting:
                               return loading();
-                              break;
+
                             case ConnectionState.active:
                               return loading();
-                              break;
+
                             case ConnectionState.done:
                               if(snapShot.hasError){
                                 return error(snapShot.error.toString());
@@ -167,20 +167,18 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                   return error('No data is recorded on DB');
                                 }else{
                                   return ListView.builder(
-                                      // scrollDirection: Axis.vertical,
                                     physics: NeverScrollableScrollPhysics(),
-                                      itemCount: snapShot.data.length,
+                                      itemCount: snapShot.data!.length,
                                       shrinkWrap: true,
                                       itemBuilder: (context, position) {
                                         return GestureDetector(
-                                            child: subcategoryComponent(snapShot.data[position])
+                                            child: subcategoryComponent(snapShot.data![position])
                                         );
                                       }
                                   );
                                 }
                               }
                           }
-                          return Container();
                         }
                     ),
                   )),

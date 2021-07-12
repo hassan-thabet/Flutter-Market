@@ -8,8 +8,8 @@ class CategoriesApi {
   Map<String, String> headers = {'Accept': 'application/json'};
 
   Future<List<Category>> fetchCategories() async {
-    String url = ApiHelper.CATEGORIES;
-    http.Response response = await http.get(url, headers: headers);
+
+    http.Response response = await http.get(Uri.parse(ApiHelper.CATEGORIES), headers: headers);
 
     switch (response.statusCode) {
       case 200:
@@ -19,15 +19,15 @@ class CategoriesApi {
           category.add(Category.fromJson(item));
         }
         return category;
-        break;
+
 
       case 404:
         throw ResourcesNotFound('Categories');
-        break;
+
 
       default:
-        return null;
-        break;
+        return throw('Error');
+
     }
   }
 }

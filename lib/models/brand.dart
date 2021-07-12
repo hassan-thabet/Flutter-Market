@@ -1,6 +1,6 @@
 class Brand{
-  int id;
-  String brandName , imageLink ;
+  int? id;
+  String? brandName , imageLink ;
 
   Brand(this.id, this.brandName, this.imageLink);
 

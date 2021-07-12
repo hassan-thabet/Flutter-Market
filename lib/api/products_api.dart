@@ -6,12 +6,10 @@ import 'dart:convert' as convert;
 
 class ProductsApi{
   Map<String , String> headers = {'Accept' : 'application/json'};
-  // var status;
-
 
   Future<List<Product>> fetchProducts() async {
-    String url = ApiHelper.PRODUCTS ;
-    http.Response response = await http.get(url , headers:headers);
+
+    http.Response response = await http.get(Uri.parse(ApiHelper.PRODUCTS) , headers:headers);
 
     switch(response.statusCode){
       case 200:
@@ -21,11 +19,11 @@ class ProductsApi{
           products.add(Product.fromJson(item));
         }
         return products;
-        break;
+
 
       default:
-        return null;
-        break;
+        return throw('Error');
+
     }
   }
 }

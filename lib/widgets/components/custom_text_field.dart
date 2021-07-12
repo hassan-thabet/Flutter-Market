@@ -9,14 +9,14 @@ class CustomTextField extends StatelessWidget {
   final IconData iconData;
   final TextEditingController controller;
   final bool isPassword ;
-  final IconData suffixIconData;
+  final IconData? suffixIconData;
 
   CustomTextField(
       {
-        @required this.labelText,
-        @required this.iconData,
-        @required this.controller,
-        @required this.isPassword,
+        required this.labelText,
+        required this.iconData,
+        required this.controller,
+        required this.isPassword,
         this.suffixIconData,
       }
       );
