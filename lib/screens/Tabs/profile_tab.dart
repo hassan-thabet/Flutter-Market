@@ -1,9 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_store/constants/app_color.dart';
 
 class ProfileTab extends StatefulWidget {
-
   @override
   _ProfileTabState createState() => _ProfileTabState();
 }
@@ -13,8 +11,6 @@ class _ProfileTabState extends State<ProfileTab> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-
-
 
     return Scaffold(
       appBar: AppBar(
@@ -42,20 +38,20 @@ class _ProfileTabState extends State<ProfileTab> {
       body: SingleChildScrollView(
         child: Container(
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: height / 45, horizontal: height / 45),
+            padding: EdgeInsets.symmetric(
+                vertical: height / 45, horizontal: height / 45),
             child: Column(
               children: [
-
                 Row(
                   children: [
                     CircleAvatar(
-                      radius: width / 6,
-                      backgroundColor: Colors.transparent,
-                      backgroundImage: NetworkImage('https://i.im.ge/2021/07/05/ufuEW.jpg')
+                        radius: width / 6,
+                        backgroundColor: Colors.transparent,
+                        backgroundImage: NetworkImage(
+                            'https://i.im.ge/2021/07/05/ufuEW.jpg')),
+                    SizedBox(
+                      width: width / 15,
                     ),
-                    SizedBox(width: width / 15,),
-
-
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -79,12 +75,13 @@ class _ProfileTabState extends State<ProfileTab> {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-
                       ],
                     )
                   ],
                 ),
-                SizedBox(height: height / 20,),
+                SizedBox(
+                  height: height / 20,
+                ),
                 Align(
                   alignment: Alignment.topLeft,
                   child: Text(
@@ -98,7 +95,9 @@ class _ProfileTabState extends State<ProfileTab> {
                     ),
                   ),
                 ),
-                SizedBox(height: height / 50,),
+                SizedBox(
+                  height: height / 50,
+                ),
                 Stack(
                   children: [
                     Align(
@@ -123,56 +122,71 @@ class _ProfileTabState extends State<ProfileTab> {
                           children: [
                             ListTile(
                               tileColor: Colors.white,
-                              leading: Icon(Icons.favorite_border_outlined , color: AppColors.M_app_main_color,),
+                              leading: Icon(
+                                Icons.favorite_border_outlined,
+                                color: AppColors.M_app_main_color,
+                              ),
                               title: Text(
                                 "My favourites",
                                 style: TextStyle(
-                                  color: AppColors.M_dark_text_color ,
+                                  color: AppColors.M_dark_text_color,
                                   fontFamily: 'Quicksand',
-
                                 ),
                               ),
-                              trailing: Icon(Icons.arrow_forward_ios , size: 15,
-                                color:  AppColors.M_semi_dark_text_color,
+                              trailing: Icon(
+                                Icons.arrow_forward_ios,
+                                size: 15,
+                                color: AppColors.M_semi_dark_text_color,
                               ),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5),),
-
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
                             ),
                             // Divider(),
                             ListTile(
                               tileColor: Colors.white,
-                              leading: Icon(Icons.view_list_sharp , color: AppColors.M_app_main_color,),
+                              leading: Icon(
+                                Icons.view_list_sharp,
+                                color: AppColors.M_app_main_color,
+                              ),
                               title: Text(
                                 "Orders",
                                 style: TextStyle(
-                                  color: AppColors.M_dark_text_color ,
+                                  color: AppColors.M_dark_text_color,
                                   fontFamily: 'Quicksand',
-
                                 ),
                               ),
-                              trailing: Icon(Icons.arrow_forward_ios , size: 15,
-                                color:  AppColors.M_semi_dark_text_color,
+                              trailing: Icon(
+                                Icons.arrow_forward_ios,
+                                size: 15,
+                                color: AppColors.M_semi_dark_text_color,
                               ),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5),),
-
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
                             ),
                             // Divider(),
                             ListTile(
                               tileColor: Colors.white,
-                              leading: Icon(Icons.shopping_basket_outlined , color: AppColors.M_app_main_color,),
+                              leading: Icon(
+                                Icons.shopping_basket_outlined,
+                                color: AppColors.M_app_main_color,
+                              ),
                               title: Text(
                                 "Finished Orders",
                                 style: TextStyle(
-                                  color: AppColors.M_dark_text_color ,
+                                  color: AppColors.M_dark_text_color,
                                   fontFamily: 'Quicksand',
-
                                 ),
                               ),
-                              trailing: Icon(Icons.arrow_forward_ios , size: 15,
+                              trailing: Icon(
+                                Icons.arrow_forward_ios,
+                                size: 15,
                                 color: AppColors.M_semi_dark_text_color,
                               ),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5),),
-
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
                             ),
                             // Divider(),
                           ],
@@ -181,7 +195,9 @@ class _ProfileTabState extends State<ProfileTab> {
                     ),
                   ],
                 ),
-                SizedBox(height: height / 20,),
+                SizedBox(
+                  height: height / 20,
+                ),
                 Align(
                   alignment: Alignment.topLeft,
                   child: Text(
@@ -195,7 +211,9 @@ class _ProfileTabState extends State<ProfileTab> {
                     ),
                   ),
                 ),
-                SizedBox(height: height / 50,),
+                SizedBox(
+                  height: height / 50,
+                ),
                 Stack(
                   children: [
                     Align(
@@ -218,87 +236,106 @@ class _ProfileTabState extends State<ProfileTab> {
                         ),
                         child: Column(
                           children: [
-
                             // Divider(),
                             ListTile(
                               tileColor: Colors.white,
-                              leading: Icon(Icons.share_outlined , color: AppColors.M_app_main_color,),
+                              leading: Icon(
+                                Icons.share_outlined,
+                                color: AppColors.M_app_main_color,
+                              ),
                               title: Text(
                                 "Invite Friends",
                                 style: TextStyle(
-                                  color: AppColors.M_dark_text_color ,
+                                  color: AppColors.M_dark_text_color,
                                   fontFamily: 'Quicksand',
-
                                 ),
                               ),
-                              trailing: Icon(Icons.arrow_forward_ios , size: 15,
+                              trailing: Icon(
+                                Icons.arrow_forward_ios,
+                                size: 15,
                                 color: AppColors.M_semi_dark_text_color,
                               ),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5),),
-
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
                             ),
                             // Divider(),
                             ListTile(
                               tileColor: Colors.white,
-                              leading: Icon(Icons.headset_mic_outlined , color: AppColors.M_app_main_color,),
+                              leading: Icon(
+                                Icons.headset_mic_outlined,
+                                color: AppColors.M_app_main_color,
+                              ),
                               title: Text(
                                 "Customer Support",
                                 style: TextStyle(
-                                  color: AppColors.M_dark_text_color ,
+                                  color: AppColors.M_dark_text_color,
                                   fontFamily: 'Quicksand',
-
                                 ),
                               ),
-                              trailing: Icon(Icons.arrow_forward_ios , size: 15,
+                              trailing: Icon(
+                                Icons.arrow_forward_ios,
+                                size: 15,
                                 color: AppColors.M_semi_dark_text_color,
                               ),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5),),
-
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
                             ),
                             // Divider(),
                             ListTile(
                               tileColor: Colors.white,
-                              leading: Icon(Icons.star_border , color: AppColors.M_app_main_color,),
+                              leading: Icon(
+                                Icons.star_border,
+                                color: AppColors.M_app_main_color,
+                              ),
                               title: Text(
                                 "Rate Our App",
                                 style: TextStyle(
-                                  color: AppColors.M_dark_text_color ,
+                                  color: AppColors.M_dark_text_color,
                                   fontFamily: 'Quicksand',
-
                                 ),
                               ),
-                              trailing: Icon(Icons.arrow_forward_ios , size: 15,
+                              trailing: Icon(
+                                Icons.arrow_forward_ios,
+                                size: 15,
                                 color: AppColors.M_semi_dark_text_color,
                               ),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5),),
-
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
                             ),
                             ListTile(
                               tileColor: Colors.white,
-                              leading: Icon(Icons.description , color: AppColors.M_app_main_color,),
+                              leading: Icon(
+                                Icons.description,
+                                color: AppColors.M_app_main_color,
+                              ),
                               title: Text(
                                 "Make a Suggestion",
                                 style: TextStyle(
-                                  color: AppColors.M_dark_text_color ,
+                                  color: AppColors.M_dark_text_color,
                                   fontFamily: 'Quicksand',
-
                                 ),
                               ),
-                              trailing: Icon(Icons.arrow_forward_ios , size: 15,
+                              trailing: Icon(
+                                Icons.arrow_forward_ios,
+                                size: 15,
                                 color: AppColors.M_semi_dark_text_color,
                               ),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5),),
-
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
                             ),
-
-
                           ],
                         ),
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: height / 50,),
+                SizedBox(
+                  height: height / 50,
+                ),
               ],
             ),
           ),

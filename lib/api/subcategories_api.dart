@@ -5,10 +5,14 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_store/utilities/api_helper.dart';
 
 class SubcategoriesApi {
-  Map<String, String> headers = {'Accept': 'application/json',};
+  Map<String, String> headers = {
+    'Accept': 'application/json',
+  };
 
   Future<List<Subcategory>> fetchSubcategories(String categoryId) async {
-    http.Response response = await http.get(Uri.parse(ApiHelper.SUBCATEGORIES + '/' + categoryId), headers: headers);
+    http.Response response = await http.get(
+        Uri.parse(ApiHelper.SUBCATEGORIES + '/' + categoryId),
+        headers: headers);
 
     switch (response.statusCode) {
       case 200:
@@ -19,14 +23,11 @@ class SubcategoriesApi {
         }
         return subcategory;
 
-
       case 404:
         throw ResourcesNotFound('Products');
 
-
       default:
-        return throw('Error');
-
+        return throw ('Error');
     }
   }
 }

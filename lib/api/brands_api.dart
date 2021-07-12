@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_store/models/brand.dart';
@@ -8,8 +7,8 @@ class BrandsApi {
   Map<String, String> headers = {'Accept': 'application/json'};
 
   Future<List<Brand>> fetchBrands(String categoryId) async {
-
-    http.Response response = await http.get(Uri.parse(ApiHelper.BRANDS + '/' + categoryId), headers: headers);
+    http.Response response = await http
+        .get(Uri.parse(ApiHelper.BRANDS + '/' + categoryId), headers: headers);
 
     switch (response.statusCode) {
       case 200:
@@ -20,10 +19,8 @@ class BrandsApi {
         }
         return brand;
 
-
       default:
-        return throw('Error');
-
+        return throw ('Error');
     }
   }
 }

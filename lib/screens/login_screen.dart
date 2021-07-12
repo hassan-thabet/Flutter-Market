@@ -43,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               color: Colors.white,
                               size: 40,
                             ),
-                            buttonFunc: (){
+                            buttonFunc: () {
                               Navigator.of(context).pop();
                             },
                           ),
@@ -69,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 color: Colors.white,
                 size: 40,
               ),
-              buttonFunc: (){
+              buttonFunc: () {
                 Navigator.of(context).pop();
               },
             ),
@@ -260,22 +260,22 @@ class _LoginScreenState extends State<LoginScreen> {
                                     EdgeInsets.symmetric(
                                         vertical: height / 55)),
                                 backgroundColor:
-                                    MaterialStateProperty.all<Color>(Colors.transparent),
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.transparent),
                                 minimumSize: MaterialStateProperty.all(
                                     Size(width / 10 * 9, height * 0.0580)),
                                 shape: MaterialStateProperty.all(
                                   RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15),
-                                    side: BorderSide(
-                                      color: AppColors.M_app_main_color,
-                                      width: 1.0,
-                                    )
-                                  ),
+                                      borderRadius: BorderRadius.circular(15),
+                                      side: BorderSide(
+                                        color: AppColors.M_app_main_color,
+                                        width: 1.0,
+                                      )),
                                 ),
                               ),
-                              onPressed: ()
-                              {
-                                Navigator.of(context).pushReplacementNamed(HomeScreen.id);
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pushReplacementNamed(HomeScreen.id);
                               },
                               child: Text(
                                 "Continue as a Guest",

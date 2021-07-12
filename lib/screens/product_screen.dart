@@ -10,7 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ProductScreen extends StatefulWidget {
   final Product product;
 
-  ProductScreen({Key? key,required this.product}) : super(key: key);
+  ProductScreen({Key? key, required this.product}) : super(key: key);
 
   @override
   _ProductScreenState createState() => _ProductScreenState();
@@ -21,16 +21,13 @@ class _ProductScreenState extends State<ProductScreen> {
   int _selectedTabBar = 0;
   final CarouselController _controller = CarouselController();
 
-  read() async
-  {
+  read() async {
     final preferences = await SharedPreferences.getInstance();
     final key = 'user_id';
     final value = preferences.get(key) ?? null;
-    if (value != null)
-    {
+    if (value != null) {
       print('I\'am a user and my id is $value');
-    }else
-    {
+    } else {
       showDialog(
         context: context,
         builder: (BuildContext context) => CustomDialog(
@@ -42,8 +39,9 @@ class _ProductScreenState extends State<ProductScreen> {
             color: Colors.white,
             size: 40,
           ),
-          buttonFunc: (){
-            Navigator.of(context).pushNamed(LoginScreen.id); // To close the dialog
+          buttonFunc: () {
+            Navigator.of(context)
+                .pushNamed(LoginScreen.id); // To close the dialog
           },
         ),
       );
@@ -52,18 +50,19 @@ class _ProductScreenState extends State<ProductScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
       backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.M_app_main_color,
-        onPressed: ()
-        {
+        onPressed: () {
           read();
         },
-        child: Icon(Icons.add_shopping_cart_rounded , color: Colors.white,),
+        child: Icon(
+          Icons.add_shopping_cart_rounded,
+          color: Colors.white,
+        ),
       ),
       appBar: AppBar(
         iconTheme: IconThemeData(

@@ -44,20 +44,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         Navigator.pushNamed(context, RegisterScreen.id),
                         showDialog(
                           context: context,
-                          builder: (BuildContext context) =>
-                              CustomDialog(
-                                title: "Failed",
-                                description: "We are having trouble on connecting",
-                                buttonText: "Ok",
-                                icon: Icon(
-                                  Icons.clear,
-                                  color: Colors.white,
-                                  size: 40,
-                                ),
-                                buttonFunc: (){
-                                  Navigator.of(context).pop();
-                                },
-                              ),
+                          builder: (BuildContext context) => CustomDialog(
+                            title: "Failed",
+                            description: "We are having trouble on connecting",
+                            buttonText: "Ok",
+                            icon: Icon(
+                              Icons.clear,
+                              color: Colors.white,
+                              size: 40,
+                            ),
+                            buttonFunc: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
                         ),
                         isLoading = false,
                       }
@@ -68,14 +67,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           context: context,
                           builder: (BuildContext context) => CustomDialog(
                             title: "Done ",
-                            description: "Your data has been saved successfully , Thank you for joining our community",
+                            description:
+                                "Your data has been saved successfully , Thank you for joining our community",
                             buttonText: "Ok",
                             icon: Icon(
                               Icons.done,
                               color: Colors.white,
                               size: 40,
                             ),
-                            buttonFunc: (){
+                            buttonFunc: () {
                               Navigator.of(context).pop();
                             },
                           ),
@@ -96,7 +96,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 color: Colors.white,
                 size: 40,
               ),
-              buttonFunc: (){
+              buttonFunc: () {
                 Navigator.of(context).pop();
               },
             ),
@@ -121,8 +121,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
               )),
             )
           : Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(8.0),
+              child: SingleChildScrollView(
                 child: GestureDetector(
                   onTap: () {
                     FocusScope.of(context).requestFocus(new FocusNode());
@@ -218,8 +218,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                             children: [
                                               Flexible(
                                                 child: Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      left: 10.0),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 10.0),
                                                   child: TextFormField(
                                                     controller:
                                                         _firstNameController,
@@ -230,7 +231,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                           TextDecoration.none,
                                                       fontFamily: 'Quicksand',
                                                       fontSize: 16,
-                                                      fontWeight: FontWeight.w500,
+                                                      fontWeight:
+                                                          FontWeight.w500,
                                                     ),
                                                     decoration:
                                                         new InputDecoration(
@@ -254,14 +256,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                 padding: const EdgeInsets.only(
                                                     bottom: 5),
                                                 child: VerticalDivider(
-                                                  color:
-                                                      AppColors.M_dark_text_color,
+                                                  color: AppColors
+                                                      .M_dark_text_color,
                                                 ),
                                               ),
                                               Flexible(
                                                 child: Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      left: 10.0),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 10.0),
                                                   child: TextFormField(
                                                     controller:
                                                         _lastNameController,
@@ -272,7 +275,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                           TextDecoration.none,
                                                       fontFamily: 'Quicksand',
                                                       fontSize: 16,
-                                                      fontWeight: FontWeight.w500,
+                                                      fontWeight:
+                                                          FontWeight.w500,
                                                     ),
                                                     decoration:
                                                         new InputDecoration(
@@ -335,9 +339,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             TextButton(
                               style: ButtonStyle(
                                 padding: MaterialStateProperty.all(
-                                    EdgeInsets.symmetric(vertical: height / 55)),
-                                backgroundColor: MaterialStateProperty.all<Color>(
-                                    AppColors.M_app_main_color),
+                                    EdgeInsets.symmetric(
+                                        vertical: height / 55)),
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        AppColors.M_app_main_color),
                                 minimumSize: MaterialStateProperty.all(
                                     Size(width / 10 * 9, height * 0.0580)),
                                 shape: MaterialStateProperty.all(
@@ -403,7 +409,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
               ),
-          ),
+            ),
     );
   }
 }

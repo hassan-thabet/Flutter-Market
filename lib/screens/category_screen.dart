@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_store/api/brands_api.dart';
 import 'package:flutter_store/api/categories_api.dart';
@@ -18,19 +17,15 @@ import 'ProductsScreens/brand_products.dart';
 class CategoryScreen extends StatefulWidget {
   final Category category;
 
-
   CategoryScreen({Key? key, required this.category}) : super(key: key);
 
   @override
   _CategoryScreenState createState() => _CategoryScreenState();
 }
-  CategoriesApi categoriesApi = CategoriesApi();
-  SubcategoriesApi subcategoriesApi = SubcategoriesApi();
-  BrandsApi brandsApi = BrandsApi();
 
-
-
-
+CategoriesApi categoriesApi = CategoriesApi();
+SubcategoriesApi subcategoriesApi = SubcategoriesApi();
+BrandsApi brandsApi = BrandsApi();
 
 class _CategoryScreenState extends State<CategoryScreen> {
   @override
@@ -38,16 +33,19 @@ class _CategoryScreenState extends State<CategoryScreen> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
-    void _goToSubcategoryProductsScreen(Subcategory subcategory, BuildContext context) {
+    void _goToSubcategoryProductsScreen(
+        Subcategory subcategory, BuildContext context) {
       Navigator.push(context, MaterialPageRoute(builder: (context) {
         return SubcategoryProductsScreen(subcategory: subcategory);
       }));
     }
+
     void _goToBrandProductsScreen(Brand brand, BuildContext context) {
       Navigator.push(context, MaterialPageRoute(builder: (context) {
         return BrandProductsScreen(brand: brand);
       }));
     }
+
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(
@@ -55,12 +53,13 @@ class _CategoryScreenState extends State<CategoryScreen> {
         ),
         centerTitle: true,
         title: Text(
-          widget.category.categoryName! ,
+          widget.category.categoryName!,
           style: TextStyle(
-            color: AppColors.M_dark_text_color ,
+            color: AppColors.M_dark_text_color,
             fontFamily: 'Quicksand',
             letterSpacing: 1.7,
-          ),),
+          ),
+        ),
         elevation: 0,
         backgroundColor: Colors.transparent,
       ),
@@ -69,8 +68,6 @@ class _CategoryScreenState extends State<CategoryScreen> {
           width: width,
           child: Column(
             children: [
-
-
               Padding(
                 padding: const EdgeInsets.only(left: 18),
                 child: Align(
@@ -96,7 +93,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     height: height / 10,
                     width: width,
                     child: FutureBuilder(
-                        future: brandsApi.fetchBrands(widget.category.id.toString()),
+                        future: brandsApi
+                            .fetchBrands(widget.category.id.toString()),
                         builder: (BuildContext context,
                             AsyncSnapshot<List<Brand>> snapShot) {
                           switch (snapShot.connectionState) {
@@ -114,7 +112,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                 return error(snapShot.error.toString());
                               } else {
                                 if (snapShot.data!.length < 1) {
-                                  return error('Some brands will be included soon');
+                                  return error(
+                                      'Some brands will be included soon');
                                 } else {
                                   return ListView.builder(
                                       scrollDirection: Axis.horizontal,
@@ -122,7 +121,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                       itemBuilder: (context, position) {
                                         return GestureDetector(
                                             onTap: () {
-                                              _goToBrandProductsScreen( snapShot.data![position] , context );
+                                              _goToBrandProductsScreen(
+                                                  snapShot.data![position],
+                                                  context);
                                             },
                                             child: brandComponent(
                                                 snapShot.data![position]));
@@ -132,14 +133,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
                           }
                         }),
                   )),
-
-
               SizedBox(
                 height: height / 20,
               ),
-
-
-
               Padding(
                 padding: const EdgeInsets.only(left: 18),
                 child: Align(
@@ -162,13 +158,13 @@ class _CategoryScreenState extends State<CategoryScreen> {
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 18.0),
                   child: Container(
-
                     width: width,
-                    child:   FutureBuilder(
-                        future: subcategoriesApi.fetchSubcategories(widget.category.id.toString()),
-                        builder: (BuildContext context , AsyncSnapshot<List<Subcategory>> snapShot){
-
-                          switch(snapShot.connectionState) {
+                    child: FutureBuilder(
+                        future: subcategoriesApi
+                            .fetchSubcategories(widget.category.id.toString()),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<List<Subcategory>> snapShot) {
+                          switch (snapShot.connectionState) {
                             case ConnectionState.none:
                               return error('nothing happened');
 
@@ -179,40 +175,35 @@ class _CategoryScreenState extends State<CategoryScreen> {
                               return loading();
 
                             case ConnectionState.done:
-                              if(snapShot.hasError){
+                              if (snapShot.hasError) {
                                 return error(snapShot.error.toString());
-                              }else{
-                                if(! snapShot.hasData){
+                              } else {
+                                if (!snapShot.hasData) {
                                   return error('No data is recorded on DB');
-                                }else{
+                                } else {
                                   return ListView.builder(
-                                    physics: NeverScrollableScrollPhysics(),
+                                      physics: NeverScrollableScrollPhysics(),
                                       itemCount: snapShot.data!.length,
                                       shrinkWrap: true,
                                       itemBuilder: (context, position) {
                                         return GestureDetector(
-                                          onTap: () {
-                                            _goToSubcategoryProductsScreen(
-                                              snapShot.data![position],
-                                              context);
-                                        },
-                                            child: subcategoryComponent(snapShot.data![position])
-                                        );
-                                      }
-                                  );
+                                            onTap: () {
+                                              _goToSubcategoryProductsScreen(
+                                                  snapShot.data![position],
+                                                  context);
+                                            },
+                                            child: subcategoryComponent(
+                                                snapShot.data![position]));
+                                      });
                                 }
                               }
                           }
-                        }
-                    ),
+                        }),
                   )),
             ],
           ),
         ),
       ),
-
     );
-
   }
 }
-

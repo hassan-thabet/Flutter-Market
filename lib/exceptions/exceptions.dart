@@ -1,30 +1,28 @@
-
-class ResourcesNotFound implements Exception{
-
+class ResourcesNotFound implements Exception {
   String message;
 
   ResourcesNotFound(this.message);
 
   @override
   String toString() {
-    return "${this.message} Not Found" ;
+    return "${this.message} Not Found";
   }
 }
 
-class MissingFields implements Exception{
+class MissingFields implements Exception {
   @override
   String toString() {
-    return"Missing Fields" ;
+    return "Missing Fields";
   }
 }
 
-class LoginField implements Exception{
+class LoginField implements Exception {
   String message;
 
   LoginField(this.message);
 
   @override
   String toString() {
-    return"${this.message}" ;
+    return "${this.message}";
   }
 }

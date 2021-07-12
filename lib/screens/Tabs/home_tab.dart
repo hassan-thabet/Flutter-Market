@@ -161,7 +161,7 @@ class _HomeTabState extends State<HomeTab> {
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 18.0),
                   child: Container(
-                     height: 360,
+                    height: 360,
                     width: width,
                     child: FutureBuilder(
                         future: productsApi.fetchProducts(),

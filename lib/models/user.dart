@@ -1,19 +1,11 @@
-class User{
+class User {
+  int? id, phoneNumber;
+  String? firstName, lastName, email, image, apiToken;
 
-  int? id , phoneNumber;
-  String? firstName , lastName , email , image , apiToken;
+  User(this.id, this.firstName, this.lastName, this.email, this.phoneNumber,
+      this.image, this.apiToken);
 
-  User(
-      this.id,
-      this.firstName,
-      this.lastName,
-      this.email,
-      this.phoneNumber,
-      this.image,
-      this.apiToken
-      );
-
-  User.fromJson(Map <String , dynamic> jsonObject){
+  User.fromJson(Map<String, dynamic> jsonObject) {
     this.id = jsonObject['id'];
     this.firstName = jsonObject['first_name'];
     this.lastName = jsonObject['last_name'];

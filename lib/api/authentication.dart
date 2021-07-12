@@ -8,9 +8,7 @@ import 'dart:convert' as convert;
 import 'dart:async';
 import 'dart:convert';
 
- class Authentication {
-
-
+class Authentication {
   Map<String, String> headers = {
     'Accept': 'application/json',
   };
@@ -18,11 +16,11 @@ import 'dart:convert';
 
   Future<User> login(String email, String password) async {
     Map<String, String> body = {'email': email, 'password': password};
-      http.Response response = await http.post(
-        Uri.parse(ApiHelper.AUTH_LOGIN),
-        headers: headers,
-        body: body,
-      );
+    http.Response response = await http.post(
+      Uri.parse(ApiHelper.AUTH_LOGIN),
+      headers: headers,
+      body: body,
+    );
 
     status = response.body.contains('error');
     var data = json.decode(response.body);
@@ -39,47 +37,44 @@ import 'dart:convert';
         User? user = User.fromJson(data);
 
         _saveAuth(true);
-        await _saveUserData(user.id , user.apiToken , user.email , user.firstName , user.lastName);
+        await _saveUserData(
+            user.id, user.apiToken, user.email, user.firstName, user.lastName);
         return user;
-
 
       case 401:
         throw LoginField('Credentials Rejected');
 
-
       default:
-        return throw('Credentials Rejected');
-
+        return throw ('Credentials Rejected');
     }
   }
 
-
-  Future<User> register(String firstName , String lastName, String email , String password ,) async {
-    FormData body =
-    new FormData.fromMap({
-      "first_name" : firstName,
+  Future<User> register(
+    String firstName,
+    String lastName,
+    String email,
+    String password,
+  ) async {
+    FormData body = new FormData.fromMap({
+      "first_name": firstName,
       'last_name': lastName,
       'email': email,
       'password': password,
     });
-
 
     Response response = await Dio().post(
       ApiHelper.AUTH_REGISTER,
       data: body,
     );
 
-    status = response.statusCode ;
-
+    status = response.statusCode;
 
     switch (response.statusCode) {
       case 201:
-
         var body = response.data;
         print(body);
 
         return body;
-
 
       case 422:
         throw MissingFields();
@@ -88,12 +83,9 @@ import 'dart:convert';
         throw LoginField('Sign Up Field');
 
       default:
-        return throw('Sign Up Field');
-
+        return throw ('Sign Up Field');
     }
   }
-
-
 
   _saveAuth(bool isAuth) async {
     final preferences = await SharedPreferences.getInstance();
@@ -102,7 +94,8 @@ import 'dart:convert';
     preferences.setBool(key, value);
   }
 
-  Future<void> _saveUserData (int? id , String? apiToken, String? firstName , String? lastName , String? email) async {
+  Future<void> _saveUserData(int? id, String? apiToken, String? firstName,
+      String? lastName, String? email) async {
     final preferences = await SharedPreferences.getInstance();
     preferences.setInt('user_id', id!);
     preferences.setString('api_token', apiToken!);
@@ -112,4 +105,4 @@ import 'dart:convert';
     // preferences.setString('image', image!);
     print('ID is $id  and its saved in shared preferences in key user_id');
   }
- }
+}

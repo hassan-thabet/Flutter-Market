@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_store/api/products_api.dart';
 import 'package:flutter_store/constants/app_color.dart';
@@ -10,20 +9,18 @@ import 'package:flutter_store/widgets/connection/error.dart';
 import 'package:flutter_store/widgets/connection/loading.dart';
 
 class SubcategoryProductsScreen extends StatefulWidget {
-
-  const SubcategoryProductsScreen
-      ({Key? key, required this.subcategory}) : super(key: key);
+  const SubcategoryProductsScreen({Key? key, required this.subcategory})
+      : super(key: key);
   final Subcategory subcategory;
 
   @override
-  _SubcategoryProductsScreenState createState() => _SubcategoryProductsScreenState();
+  _SubcategoryProductsScreenState createState() =>
+      _SubcategoryProductsScreenState();
 }
+
 ProductsApi productsApi = new ProductsApi();
 
-
 class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
-
-
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -34,6 +31,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
         return ProductScreen(product: product);
       }));
     }
+
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(
@@ -41,19 +39,20 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
         ),
         centerTitle: true,
         title: Text(
-          widget.subcategory.subcategoryName! ,
+          widget.subcategory.subcategoryName!,
           style: TextStyle(
-            color: AppColors.M_dark_text_color ,
+            color: AppColors.M_dark_text_color,
             fontFamily: 'Quicksand',
             letterSpacing: 1.7,
-          ),),
+          ),
+        ),
         elevation: 0,
         backgroundColor: Colors.transparent,
       ),
       body: SingleChildScrollView(
         child: SizedBox(
-            width: width,
-            height: height,
+          width: width,
+          height: height,
           child: Column(
             children: [
               Padding(
@@ -81,10 +80,11 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                     height: 360,
                     width: width,
                     child: FutureBuilder(
-                        future: productsApi.fetchProductsBySubcategory(widget.subcategory.id.toString()),
-                        builder: (BuildContext context , AsyncSnapshot<List<Product>> snapShot){
-
-                          switch(snapShot.connectionState) {
+                        future: productsApi.fetchProductsBySubcategory(
+                            widget.subcategory.id.toString()),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<List<Product>> snapShot) {
+                          switch (snapShot.connectionState) {
                             case ConnectionState.none:
                               return error('nothing happened');
 
@@ -95,10 +95,10 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                               return loading();
 
                             case ConnectionState.done:
-                              if(snapShot.hasError){
+                              if (snapShot.hasError) {
                                 return error(snapShot.error.toString());
-                              }else{
-                                if(snapShot.data!.length == 0){
+                              } else {
+                                if (snapShot.data!.length == 0) {
                                   return Center(
                                     child: Text(
                                       'We will be adding more products soon in this section wait for us',
@@ -112,7 +112,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                                       textAlign: TextAlign.center,
                                     ),
                                   );
-                                }else{
+                                } else {
                                   return ListView.builder(
                                       scrollDirection: Axis.horizontal,
                                       itemCount: snapShot.data!.length,
@@ -123,16 +123,13 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                                                   snapShot.data![position],
                                                   context);
                                             },
-                                            child: productComponent(snapShot.data![position])
-                                        );
-                                      }
-                                  );
+                                            child: productComponent(
+                                                snapShot.data![position]));
+                                      });
                                 }
                               }
                           }
-
-                        }
-                    ),
+                        }),
                   )),
             ],
           ),

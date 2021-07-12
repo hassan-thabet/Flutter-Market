@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_store/api/products_api.dart';
 import 'package:flutter_store/constants/app_color.dart';
@@ -11,14 +10,13 @@ import 'package:flutter_store/widgets/connection/loading.dart';
 import '../product_screen.dart';
 
 class BrandProductsScreen extends StatefulWidget {
-
-
   final Brand brand;
-  const BrandProductsScreen({Key? key , required this.brand}) : super(key: key);
+  const BrandProductsScreen({Key? key, required this.brand}) : super(key: key);
 
   @override
   _BrandProductsScreenState createState() => _BrandProductsScreenState();
 }
+
 ProductsApi productsApi = new ProductsApi();
 
 class _BrandProductsScreenState extends State<BrandProductsScreen> {
@@ -40,12 +38,13 @@ class _BrandProductsScreenState extends State<BrandProductsScreen> {
         ),
         centerTitle: true,
         title: Text(
-          widget.brand.brandName! ,
+          widget.brand.brandName!,
           style: TextStyle(
-            color: AppColors.M_dark_text_color ,
+            color: AppColors.M_dark_text_color,
             fontFamily: 'Quicksand',
             letterSpacing: 1.7,
-          ),),
+          ),
+        ),
         elevation: 0,
         backgroundColor: Colors.transparent,
       ),
@@ -80,10 +79,11 @@ class _BrandProductsScreenState extends State<BrandProductsScreen> {
                     height: 360,
                     width: width,
                     child: FutureBuilder(
-                        future: productsApi.fetchProductsByBrand(widget.brand.id.toString()),
-                        builder: (BuildContext context , AsyncSnapshot<List<Product>> snapShot){
-
-                          switch(snapShot.connectionState) {
+                        future: productsApi
+                            .fetchProductsByBrand(widget.brand.id.toString()),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<List<Product>> snapShot) {
+                          switch (snapShot.connectionState) {
                             case ConnectionState.none:
                               return error('nothing happened');
 
@@ -94,10 +94,10 @@ class _BrandProductsScreenState extends State<BrandProductsScreen> {
                               return loading();
 
                             case ConnectionState.done:
-                              if(snapShot.hasError){
+                              if (snapShot.hasError) {
                                 return error(snapShot.error.toString());
-                              }else{
-                                if(snapShot.data!.length == 0){
+                              } else {
+                                if (snapShot.data!.length == 0) {
                                   return Center(
                                     child: Text(
                                       'We will be adding more products soon in this section wait for us',
@@ -111,7 +111,7 @@ class _BrandProductsScreenState extends State<BrandProductsScreen> {
                                       textAlign: TextAlign.center,
                                     ),
                                   );
-                                }else{
+                                } else {
                                   return ListView.builder(
                                       scrollDirection: Axis.horizontal,
                                       itemCount: snapShot.data!.length,
@@ -122,16 +122,13 @@ class _BrandProductsScreenState extends State<BrandProductsScreen> {
                                                   snapShot.data![position],
                                                   context);
                                             },
-                                            child: productComponent(snapShot.data![position])
-                                        );
-                                      }
-                                  );
+                                            child: productComponent(
+                                                snapShot.data![position]));
+                                      });
                                 }
                               }
                           }
-
-                        }
-                    ),
+                        }),
                   )),
             ],
           ),

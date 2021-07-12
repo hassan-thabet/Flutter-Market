@@ -6,8 +6,8 @@ import 'package:flutter_store/screens/Tabs/search_tab.dart';
 import 'Tabs/cart_tab.dart';
 import 'Tabs/more_tab.dart';
 import 'Tabs/profile_tab.dart';
-class HomeScreen extends StatefulWidget {
 
+class HomeScreen extends StatefulWidget {
   static String id = 'HomeScreen';
 
   @override
@@ -21,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
       currentTab = index;
     });
   }
+
   final List<Widget> _screens = [
     HomeTab(),
     SearchTab(),
@@ -75,6 +76,5 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
     );
-    }
   }
-
+}

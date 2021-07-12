@@ -4,8 +4,8 @@ class Product {
   double? price;
   List<String>? images;
 
-  Product(this.id, this.price, this.subcategoryId, this.title,
-      this.description, this.type, this.status, this.images);
+  Product(this.id, this.price, this.subcategoryId, this.title, this.description,
+      this.type, this.status, this.images);
 
   Product.fromJson(Map<String, dynamic> jsonObject) {
     this.id = jsonObject['id'];
