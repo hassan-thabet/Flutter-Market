@@ -16,14 +16,14 @@
 
 ## Home & Category & product Screens
 <p align="center">
-  <img src="https://github.com/hassan-thabet/Flutter-Market/blob/master/screenshots/home.png" width="290" title="first screen">
-  <img src="https://github.com/hassan-thabet/Flutter-Market/blob/master/screenshots/category.png" width="290" title="first screen">
-  <img src="https://github.com/hassan-thabet/Flutter-Market/blob/master/screenshots/product.png" width="290" title="first screen">
+  <img src="https://github.com/hassan-thabet/Flutter-Market/blob/master/screenshots/home.png" width="270" title="first screen">
+  <img src="https://github.com/hassan-thabet/Flutter-Market/blob/master/screenshots/category.png" width="270" title="first screen">
+  <img src="https://github.com/hassan-thabet/Flutter-Market/blob/master/screenshots/product.png" width="270" title="first screen">
 </p>
 
 ## Cart & Profile & More Tabs
 <p align="center">
-  <img src="https://github.com/hassan-thabet/Flutter-Market/blob/master/screenshots/cart.png" width="290" title="first screen">
-  <img src="https://github.com/hassan-thabet/Flutter-Market/blob/master/screenshots/more.png" width="290" title="first screen">
-  <img src="https://github.com/hassan-thabet/Flutter-Market/blob/master/screenshots/profile.png" width="290" title="first screen">
+  <img src="https://github.com/hassan-thabet/Flutter-Market/blob/master/screenshots/cart.png" width="270" title="first screen">
+  <img src="https://github.com/hassan-thabet/Flutter-Market/blob/master/screenshots/more.png" width="270" title="first screen">
+  <img src="https://github.com/hassan-thabet/Flutter-Market/blob/master/screenshots/profile.png" width="270" title="first screen">
 </p>
