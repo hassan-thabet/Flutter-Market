@@ -18,6 +18,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool isLoading = false;
+  bool visibility = false;
   @override
   Widget build(BuildContext context) {
     Authentication authentication = Authentication();
@@ -195,6 +196,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           controller: _emailController,
                                           iconData: Icons.email_outlined,
                                           labelText: 'E-mail',
+                                          visibilityOnTap: (){},
                                         ),
 
                                         // divider
@@ -204,12 +206,19 @@ class _LoginScreenState extends State<LoginScreen> {
 
                                         // password text field
                                         CustomTextField(
-                                            isPassword: true,
+                                            visibilityOnTap: ()
+                                            {
+                                              setState(() {
+                                                visibility = !visibility;
+                                              });
+                                            },
+                                            isPassword: (visibility == false) ? true : false,
+                                            suffixIconData: (visibility == false) ? Icons.visibility : Icons.visibility_off ,
                                             controller: _passwordController,
                                             iconData: Icons.lock_open,
                                             labelText: 'Password',
-                                            suffixIconData:
-                                                Icons.visibility_off_outlined),
+
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -325,44 +334,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                               ],
                             ),
-
-                            // Text(
-                            //   'Or continue with ',
-                            //   style: TextStyle(
-                            //     color: AppColors.M_semi_dark_text_color,
-                            //     decoration: TextDecoration.none,
-                            //     fontFamily: 'Quicksand',
-                            //     fontSize: 18,
-                            //     fontWeight: FontWeight.w500,
-                            //   ),
-                            //   textAlign: TextAlign.center,
-                            // ),
-                            // Row(
-                            //   mainAxisAlignment: MainAxisAlignment.center,
-                            //   children: [
-                            //     Padding(
-                            //       padding: const EdgeInsets.all(8.0),
-                            //       child: Image.asset(
-                            //         'assets/icons/facebook.png',
-                            //         scale: 12,
-                            //       ),
-                            //     ),
-                            //     Padding(
-                            //       padding: const EdgeInsets.all(8.0),
-                            //       child: Image.asset(
-                            //         'assets/icons/googlePlus.png',
-                            //         scale: 12,
-                            //       ),
-                            //     ),
-                            //     Padding(
-                            //       padding: const EdgeInsets.all(8.0),
-                            //       child: Image.asset(
-                            //         'assets/icons/twitter.png',
-                            //         scale: 12,
-                            //       ),
-                            //     ),
-                            //   ],
-                            // ),
                           ],
                         )),
                   ),

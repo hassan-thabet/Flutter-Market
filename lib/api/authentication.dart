@@ -14,7 +14,10 @@ class Authentication {
   };
   var status;
 
-  Future<User> login(String email, String password) async {
+  Future<User> login(
+      String email,
+      String password,
+      ) async {
     Map<String, String> body = {'email': email, 'password': password};
     http.Response response = await http.post(
       Uri.parse(ApiHelper.AUTH_LOGIN),
@@ -36,9 +39,16 @@ class Authentication {
         var data = body['data'];
         User? user = User.fromJson(data);
 
-        _saveAuth(true);
         await _saveUserData(
-            user.id, user.apiToken, user.email, user.firstName, user.lastName);
+            true ,
+            user.id,
+            user.apiToken,
+            user.firstName,
+            user.lastName ,
+            user.email,
+            user.image,
+        );
+
         return user;
 
       case 401:
@@ -72,7 +82,19 @@ class Authentication {
     switch (response.statusCode) {
       case 201:
         var body = response.data;
-        print(body);
+
+        var data = body['data'];
+        User? user = User.fromJson(data);
+        await _saveUserData(
+          true ,
+          user.id,
+          user.apiToken,
+          user.firstName,
+          user.lastName ,
+          user.email,
+          user.image,
+        );
+        print('data saved successfully in sharedPreferences');
 
         return body;
 
@@ -87,22 +109,31 @@ class Authentication {
     }
   }
 
-  _saveAuth(bool isAuth) async {
-    final preferences = await SharedPreferences.getInstance();
-    final key = 'authenticated';
-    final value = isAuth;
-    preferences.setBool(key, value);
-  }
+  Future<void> _saveUserData(
+      bool? isAuth ,
+      int? id,
+      String? apiToken,
+      String? firstName,
+      String? lastName,
+      String? email ,
+      String? image ,
+      ) async {
 
-  Future<void> _saveUserData(int? id, String? apiToken, String? firstName,
-      String? lastName, String? email) async {
     final preferences = await SharedPreferences.getInstance();
+    preferences.setBool('authenticated', isAuth!);
     preferences.setInt('user_id', id!);
     preferences.setString('api_token', apiToken!);
     preferences.setString('first_name', firstName!);
     preferences.setString('last_name', lastName!);
     preferences.setString('email', email!);
-    // preferences.setString('image', image!);
-    print('ID is $id  and its saved in shared preferences in key user_id');
+
+    if (image != null)
+    {
+      preferences.setString('image', image);
+    }else{print('don\'t Have image');}
+
+
+
+    print('save data in pref done successfully');
   }
 }

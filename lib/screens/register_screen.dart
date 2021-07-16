@@ -21,7 +21,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _passwordController = TextEditingController();
 
   bool isLoading = false;
-
+  bool visibility = false;
   @override
   Widget build(BuildContext context) {
     Authentication authentication = Authentication();
@@ -310,6 +310,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           controller: _emailController,
                                           iconData: Icons.email_outlined,
                                           labelText: 'E-mail',
+                                          visibilityOnTap: (){},
+
                                         ),
 
                                         // divider
@@ -319,12 +321,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         ),
 
                                         CustomTextField(
-                                            isPassword: true,
                                             controller: _passwordController,
                                             iconData: Icons.lock_open,
                                             labelText: 'Password',
-                                            suffixIconData:
-                                                Icons.visibility_off_outlined),
+                                            visibilityOnTap: ()
+                                            {
+                                              setState(() {
+                                                visibility = !visibility;
+                                              });
+                                            },
+                                            isPassword: (visibility == false) ? true : false,
+                                            suffixIconData: (visibility == false) ? Icons.visibility : Icons.visibility_off ,
+
+                                        ),
                                       ],
                                     ),
                                   ),

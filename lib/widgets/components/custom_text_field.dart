@@ -10,6 +10,7 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final bool isPassword ;
   final IconData? suffixIconData;
+  final VoidCallback visibilityOnTap;
 
   CustomTextField(
       {
@@ -17,11 +18,13 @@ class CustomTextField extends StatelessWidget {
         required this.iconData,
         required this.controller,
         required this.isPassword,
+        required this.visibilityOnTap,
         this.suffixIconData,
       }
       );
   @override
   Widget build(BuildContext context) {
+
     return TextFormField(
       controller: controller,
       style: TextStyle(
@@ -44,11 +47,14 @@ class CustomTextField extends StatelessWidget {
         border: InputBorder.none,
         prefixIcon: Icon(iconData,
             color: AppColors.M_icons_color),
-        suffixIcon: Icon(
+        suffixIcon: IconButton(
+          onPressed: visibilityOnTap,
+          icon: Icon(
           suffixIconData,
           size: 20,
           color: AppColors.M_icons_color,
-        ),
+        )
+          ,)
       ),
     );
   }

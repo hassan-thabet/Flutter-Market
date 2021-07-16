@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_store/constants/app_color.dart';
+import 'package:flutter_store/widgets/components/custom_dialog.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../login_screen.dart';
 
 class MoreTab extends StatefulWidget {
   @override
@@ -7,6 +11,8 @@ class MoreTab extends StatefulWidget {
 }
 
 class _MoreTabState extends State<MoreTab> {
+
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -14,7 +20,7 @@ class _MoreTabState extends State<MoreTab> {
 
     return Scaffold(
       appBar: AppBar(
-        centerTitle: false,
+        centerTitle: true,
         title: Text(
           'more'.toUpperCase(),
           style: TextStyle(
@@ -23,15 +29,6 @@ class _MoreTabState extends State<MoreTab> {
             letterSpacing: 4,
           ),
         ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 12.0),
-            child: Icon(
-              Icons.notifications_active_outlined,
-              color: AppColors.M_icons_color,
-            ),
-          ),
-        ],
         elevation: 0,
         backgroundColor: Colors.transparent,
       ),
@@ -246,7 +243,6 @@ class _MoreTabState extends State<MoreTab> {
                       ),
                       child: Column(
                         children: [
-                          // Divider(),
                           ListTile(
                             tileColor: Colors.white,
                             leading: Icon(
@@ -269,7 +265,6 @@ class _MoreTabState extends State<MoreTab> {
                               borderRadius: BorderRadius.circular(5),
                             ),
                           ),
-                          // Divider(),
                           ListTile(
                             tileColor: Colors.white,
                             leading: Icon(
@@ -292,7 +287,6 @@ class _MoreTabState extends State<MoreTab> {
                               borderRadius: BorderRadius.circular(5),
                             ),
                           ),
-                          // Divider(),
                           ListTile(
                             tileColor: Colors.white,
                             leading: Icon(
@@ -314,6 +308,73 @@ class _MoreTabState extends State<MoreTab> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5),
                             ),
+                          ),
+
+                          ListTile(
+                            tileColor: Colors.white,
+                            leading: Icon(
+                              Icons.logout_outlined,
+                              color: AppColors.M_app_main_color,
+                            ),
+                            title: Text(
+                              "Logout",
+                              style: TextStyle(
+                                color: AppColors.M_dark_text_color,
+                                fontFamily: 'Quicksand',
+                              ),
+                            ),
+                            trailing: Icon(
+                              Icons.arrow_forward_ios,
+                              size: 15,
+                              color: AppColors.M_semi_dark_text_color,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            onTap: () async {
+                              final preferences = await SharedPreferences.getInstance();
+                              final key = 'authenticated';
+                              final value = preferences.get(key) ?? null;
+
+                              final imageKey = 'image';
+                              final imageValue = preferences.get(imageKey) ?? null;
+
+                              if (value == true) {
+                                preferences.remove('authenticated');
+                                preferences.remove('user_id');
+                                preferences.remove('api_token');
+                                preferences.remove('first_name');
+                                preferences.remove('last_name');
+                                preferences.remove('email');
+
+                                if (imageValue != null)
+                                {
+                                  preferences.remove('image');
+                                }else{print('don\'t Have image another data was deleted');}
+
+
+                                print('user data removed successfully');
+                                Navigator.of(context)
+                                    .pushNamedAndRemoveUntil(LoginScreen.id, (route) => false);
+                              }else{
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) => CustomDialog(
+                                    title: "You are not logged in",
+                                    description: "",
+                                    buttonText: "OK",
+                                    icon: Icon(
+                                      Icons.clear,
+                                      color: Colors.white,
+                                      size: 40,
+                                    ),
+                                    buttonFunc: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                );
+                              }
+                              },
                           ),
                         ],
                       ),

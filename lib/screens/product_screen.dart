@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_store/api/carts_api.dart';
 import 'package:flutter_store/constants/app_color.dart';
 import 'package:flutter_store/models/product.dart';
 import 'package:flutter_store/screens/login_screen.dart';
@@ -17,6 +18,7 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen> {
+  CartsApi cartsApi = CartsApi();
   int _currentImage = 0;
   int _selectedTabBar = 0;
   final CarouselController _controller = CarouselController();
@@ -26,7 +28,14 @@ class _ProductScreenState extends State<ProductScreen> {
     final key = 'user_id';
     final value = preferences.get(key) ?? null;
     if (value != null) {
-      print('I\'am a user and my id is $value');
+      try
+      {
+        await cartsApi.addProductToCart(widget.product.id!);
+        print('Product added to cart successfully');
+      }catch(Ex)
+      {
+        print(Ex);
+      }
     } else {
       showDialog(
         context: context,
@@ -47,6 +56,9 @@ class _ProductScreenState extends State<ProductScreen> {
       );
     }
   }
+
+
+
 
   @override
   Widget build(BuildContext context) {

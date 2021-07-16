@@ -9,3 +9,4 @@ class AppColors {
   static const Color M_icons_color = Color(0xff707070);
   static const Color M_isLoading_color = Color(0xFFf0f0f0);
 }
+// 0xFF00BCD4

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_store/constants/app_color.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileTab extends StatefulWidget {
   @override
@@ -7,14 +8,44 @@ class ProfileTab extends StatefulWidget {
 }
 
 class _ProfileTabState extends State<ProfileTab> {
+
+  // Future<SharedPreferences> preferences = SharedPreferences.getInstance();
+  // late String firstName;
+  // late Future<String> lastName ;
+  // late Future<String> email;
+
+
+  String firstName = '';
+  String lastName = '';
+  String email = '';
+  String image = '';
+
+  _loadData() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    setState(() {
+      firstName = (preferences.getString('first_name') ?? 'Guest');
+      lastName = (preferences.getString('last_name') ?? 'User');
+      email = (preferences.getString('email') ?? 'Email');
+      image = (preferences.getString('image') ?? 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png');
+    });
+  }
+
+
+  @override
+  void initState() {
+    super.initState();
+    _loadData();
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
+
     return Scaffold(
       appBar: AppBar(
-        centerTitle: false,
+        centerTitle: true,
         title: Text(
           'Profile'.toUpperCase(),
           style: TextStyle(
@@ -23,15 +54,6 @@ class _ProfileTabState extends State<ProfileTab> {
             letterSpacing: 4,
           ),
         ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 12.0),
-            child: Icon(
-              Icons.notifications_active_outlined,
-              color: AppColors.M_icons_color,
-            ),
-          ),
-        ],
         elevation: 0,
         backgroundColor: Colors.transparent,
       ),
@@ -47,31 +69,31 @@ class _ProfileTabState extends State<ProfileTab> {
                     CircleAvatar(
                         radius: width / 6,
                         backgroundColor: Colors.transparent,
-                        backgroundImage: NetworkImage(
-                            'https://i.im.ge/2021/07/05/ufuEW.jpg')),
+                        backgroundImage: NetworkImage(image)),
                     SizedBox(
                       width: width / 15,
                     ),
+
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'hassanThabet',
+                          firstName + ' ' + lastName,
                           style: TextStyle(
                             color: AppColors.M_semi_dark_text_color,
                             decoration: TextDecoration.none,
                             fontFamily: 'Quicksand',
-                            fontSize: 24,
+                            fontSize: 22,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
                         Text(
-                          'dev.7assan@gmail.com',
+                          email,
                           style: TextStyle(
                             color: AppColors.M_semi_dark_text_color,
                             decoration: TextDecoration.none,
                             fontFamily: 'Quicksand',
-                            fontSize: 16,
+                            fontSize: 14,
                             fontWeight: FontWeight.w500,
                           ),
                         ),

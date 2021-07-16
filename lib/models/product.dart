@@ -1,5 +1,6 @@
 class Product {
-  int? id, subcategoryId;
+  int? id;
+  int? subcategoryId;
   String? title, description, type, status;
   double? price;
   List<String>? images;
