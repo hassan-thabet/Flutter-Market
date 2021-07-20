@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_store/constants/app_color.dart';
 import 'package:flutter_store/screens/Tabs/home_tab.dart';
 import 'package:flutter_store/screens/Tabs/search_tab.dart';
-
 import 'Tabs/cart_tab.dart';
 import 'Tabs/more_tab.dart';
 import 'Tabs/profile_tab.dart';
@@ -31,8 +30,6 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
   @override
   Widget build(BuildContext context) {
-    // double width = MediaQuery.of(context).size.width;
-    // double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
       backgroundColor: AppColors.M_background_color,
@@ -55,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
         items: [
           BottomNavigationBarItem(
             label: 'Home',
-            icon: Icon(Icons.home_outlined),
+            icon: Icon(Icons.home_filled),
           ),
           BottomNavigationBarItem(
             label: 'Search',

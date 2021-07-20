@@ -1,3 +1,4 @@
+
 class ResourcesNotFound implements Exception {
   String message;
 

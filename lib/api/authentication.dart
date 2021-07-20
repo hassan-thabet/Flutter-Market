@@ -3,39 +3,28 @@ import 'package:flutter_store/exceptions/exceptions.dart';
 import 'package:flutter_store/models/user.dart';
 import 'package:flutter_store/utilities/api_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert' as convert;
 import 'dart:async';
-import 'dart:convert';
 
 class Authentication {
-  Map<String, String> headers = {
-    'Accept': 'application/json',
-  };
-  var status;
 
+  var status;
   Future<User> login(
       String email,
       String password,
       ) async {
-    Map<String, String> body = {'email': email, 'password': password};
-    http.Response response = await http.post(
-      Uri.parse(ApiHelper.AUTH_LOGIN),
-      headers: headers,
-      body: body,
+
+    FormData body = new FormData.fromMap({
+      "email": email,
+      'password': password,
+    });
+    Response response = await Dio().post(
+      ApiHelper.AUTH_LOGIN,
+      data: body,
     );
-
-    status = response.body.contains('error');
-    var data = json.decode(response.body);
-    if (status) {
-      print('data : ${data["error"]}');
-    } else {
-      print("login done successfully");
-    }
-
+    status = response.statusCode;
     switch (response.statusCode) {
       case 200:
-        var body = convert.jsonDecode(response.body);
+        var body = response.data;
         var data = body['data'];
         User? user = User.fromJson(data);
 
@@ -48,7 +37,7 @@ class Authentication {
             user.email,
             user.image,
         );
-
+        print('user logged in successfully');
         return user;
 
       case 401:
@@ -78,11 +67,9 @@ class Authentication {
     );
 
     status = response.statusCode;
-
     switch (response.statusCode) {
       case 201:
         var body = response.data;
-
         var data = body['data'];
         User? user = User.fromJson(data);
         await _saveUserData(

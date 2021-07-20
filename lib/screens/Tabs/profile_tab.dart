@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_store/constants/app_color.dart';
+import 'package:flutter_store/widgets/components/custom_list_tile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileTab extends StatefulWidget {
@@ -142,74 +143,10 @@ class _ProfileTabState extends State<ProfileTab> {
                         ),
                         child: Column(
                           children: [
-                            ListTile(
-                              tileColor: Colors.white,
-                              leading: Icon(
-                                Icons.favorite_border_outlined,
-                                color: AppColors.M_app_main_color,
-                              ),
-                              title: Text(
-                                "My favourites",
-                                style: TextStyle(
-                                  color: AppColors.M_dark_text_color,
-                                  fontFamily: 'Quicksand',
-                                ),
-                              ),
-                              trailing: Icon(
-                                Icons.arrow_forward_ios,
-                                size: 15,
-                                color: AppColors.M_semi_dark_text_color,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                            ),
-                            // Divider(),
-                            ListTile(
-                              tileColor: Colors.white,
-                              leading: Icon(
-                                Icons.view_list_sharp,
-                                color: AppColors.M_app_main_color,
-                              ),
-                              title: Text(
-                                "Orders",
-                                style: TextStyle(
-                                  color: AppColors.M_dark_text_color,
-                                  fontFamily: 'Quicksand',
-                                ),
-                              ),
-                              trailing: Icon(
-                                Icons.arrow_forward_ios,
-                                size: 15,
-                                color: AppColors.M_semi_dark_text_color,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                            ),
-                            // Divider(),
-                            ListTile(
-                              tileColor: Colors.white,
-                              leading: Icon(
-                                Icons.shopping_basket_outlined,
-                                color: AppColors.M_app_main_color,
-                              ),
-                              title: Text(
-                                "Finished Orders",
-                                style: TextStyle(
-                                  color: AppColors.M_dark_text_color,
-                                  fontFamily: 'Quicksand',
-                                ),
-                              ),
-                              trailing: Icon(
-                                Icons.arrow_forward_ios,
-                                size: 15,
-                                color: AppColors.M_semi_dark_text_color,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                            ),
+                            CustomListTile(Icons.favorite_border_outlined, "My favourites", (){}),
+                            CustomListTile(Icons.view_list_sharp , "Orders", (){}),
+                            CustomListTile(Icons.shopping_basket_outlined, "Finished Orders", (){})
+
                             // Divider(),
                           ],
                         ),
@@ -258,97 +195,10 @@ class _ProfileTabState extends State<ProfileTab> {
                         ),
                         child: Column(
                           children: [
-                            // Divider(),
-                            ListTile(
-                              tileColor: Colors.white,
-                              leading: Icon(
-                                Icons.share_outlined,
-                                color: AppColors.M_app_main_color,
-                              ),
-                              title: Text(
-                                "Invite Friends",
-                                style: TextStyle(
-                                  color: AppColors.M_dark_text_color,
-                                  fontFamily: 'Quicksand',
-                                ),
-                              ),
-                              trailing: Icon(
-                                Icons.arrow_forward_ios,
-                                size: 15,
-                                color: AppColors.M_semi_dark_text_color,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                            ),
-                            // Divider(),
-                            ListTile(
-                              tileColor: Colors.white,
-                              leading: Icon(
-                                Icons.headset_mic_outlined,
-                                color: AppColors.M_app_main_color,
-                              ),
-                              title: Text(
-                                "Customer Support",
-                                style: TextStyle(
-                                  color: AppColors.M_dark_text_color,
-                                  fontFamily: 'Quicksand',
-                                ),
-                              ),
-                              trailing: Icon(
-                                Icons.arrow_forward_ios,
-                                size: 15,
-                                color: AppColors.M_semi_dark_text_color,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                            ),
-                            // Divider(),
-                            ListTile(
-                              tileColor: Colors.white,
-                              leading: Icon(
-                                Icons.star_border,
-                                color: AppColors.M_app_main_color,
-                              ),
-                              title: Text(
-                                "Rate Our App",
-                                style: TextStyle(
-                                  color: AppColors.M_dark_text_color,
-                                  fontFamily: 'Quicksand',
-                                ),
-                              ),
-                              trailing: Icon(
-                                Icons.arrow_forward_ios,
-                                size: 15,
-                                color: AppColors.M_semi_dark_text_color,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                            ),
-                            ListTile(
-                              tileColor: Colors.white,
-                              leading: Icon(
-                                Icons.description,
-                                color: AppColors.M_app_main_color,
-                              ),
-                              title: Text(
-                                "Make a Suggestion",
-                                style: TextStyle(
-                                  color: AppColors.M_dark_text_color,
-                                  fontFamily: 'Quicksand',
-                                ),
-                              ),
-                              trailing: Icon(
-                                Icons.arrow_forward_ios,
-                                size: 15,
-                                color: AppColors.M_semi_dark_text_color,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                            ),
+                            CustomListTile(Icons.share_outlined, "Invite Friends", (){}),
+                            CustomListTile(Icons.headset_mic_outlined, "Customer Support", (){}),
+                            CustomListTile(Icons.star_border, "Rate Our App", (){}),
+                            CustomListTile(Icons.description, "Make a Suggestion", (){})
                           ],
                         ),
                       ),

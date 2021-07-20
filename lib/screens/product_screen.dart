@@ -6,6 +6,7 @@ import 'package:flutter_store/screens/login_screen.dart';
 import 'package:flutter_store/utilities/api_helper.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_store/widgets/components/custom_dialog.dart';
+import 'package:flutter_store/widgets/components/my_snack_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProductScreen extends StatefulWidget {
@@ -31,7 +32,7 @@ class _ProductScreenState extends State<ProductScreen> {
       try
       {
         await cartsApi.addProductToCart(widget.product.id!);
-        print('Product added to cart successfully');
+        showInSnackBar(context, 'Product added to your cart successfully');
       }catch(Ex)
       {
         print(Ex);

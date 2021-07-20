@@ -1,5 +1,5 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_store/api/brands_api.dart';
 import 'package:flutter_store/api/categories_api.dart';
 import 'package:flutter_store/api/products_api.dart';
 import 'package:flutter_store/constants/app_color.dart';
@@ -19,7 +19,6 @@ class HomeTab extends StatefulWidget {
 
 class _HomeTabState extends State<HomeTab> {
   CategoriesApi categoriesApi = new CategoriesApi();
-  BrandsApi brandsApi = new BrandsApi();
   ProductsApi productsApi = new ProductsApi();
 
   @override
@@ -47,7 +46,7 @@ class _HomeTabState extends State<HomeTab> {
           color: AppColors.M_icons_color,
         ),
         title: Text(
-          'MARKET',
+          'market'.toUpperCase(),
           style: TextStyle(
             color: AppColors.M_dark_text_color,
             fontFamily: 'Quicksand',
@@ -58,7 +57,7 @@ class _HomeTabState extends State<HomeTab> {
           Padding(
             padding: const EdgeInsets.only(right: 12.0),
             child: Icon(
-              Icons.notifications_active_outlined,
+              Icons.notifications_none_outlined,
               color: AppColors.M_icons_color,
             ),
           ),

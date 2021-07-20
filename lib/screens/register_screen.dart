@@ -3,8 +3,8 @@ import 'package:flutter_store/api/authentication.dart';
 import 'package:flutter_store/constants/app_color.dart';
 import 'package:flutter_store/screens/home_screen.dart';
 import 'package:flutter_store/screens/login_screen.dart';
-import 'package:flutter_store/widgets/components/custom_dialog.dart';
 import 'package:flutter_store/widgets/components/custom_text_field.dart';
+import 'package:flutter_store/widgets/components/my_snack_bar.dart';
 
 class RegisterScreen extends StatefulWidget {
   static String id = 'RegisterScreen';
@@ -19,9 +19,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
-  bool isLoading = false;
   bool visibility = false;
+
   @override
   Widget build(BuildContext context) {
     Authentication authentication = Authentication();
@@ -30,7 +29,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
     _onPressed() {
       setState(() {
-        isLoading = true;
         if (_firstNameController.text.isNotEmpty &&
             _lastNameController.text.isNotEmpty &&
             _emailController.text.trim().isNotEmpty &&
@@ -41,86 +39,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
               .whenComplete(() => {
                     if (authentication.status != 201)
                       {
-                        Navigator.pushNamed(context, RegisterScreen.id),
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) => CustomDialog(
-                            title: "Failed",
-                            description: "We are having trouble on connecting",
-                            buttonText: "Ok",
-                            icon: Icon(
-                              Icons.clear,
-                              color: Colors.white,
-                              size: 40,
-                            ),
-                            buttonFunc: () {
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ),
-                        isLoading = false,
+                        showInSnackBar(context, 'error was happened'),
                       }
                     else
                       {
                         Navigator.pushReplacementNamed(context, HomeScreen.id),
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) => CustomDialog(
-                            title: "Done ",
-                            description:
-                                "Your data has been saved successfully , Thank you for joining our community",
-                            buttonText: "Ok",
-                            icon: Icon(
-                              Icons.done,
-                              color: Colors.white,
-                              size: 40,
-                            ),
-                            buttonFunc: () {
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ),
-                        isLoading = false,
+                        showInSnackBar(context, 'Your account has been registered'),
                       }
                   });
         } else {
-          isLoading = false;
-          showDialog(
-            context: context,
-            builder: (BuildContext context) => CustomDialog(
-              title: "Missed data",
-              description: "Here is missed data error",
-              buttonText: "Ok",
-              icon: Icon(
-                Icons.clear,
-                color: Colors.white,
-                size: 40,
-              ),
-              buttonFunc: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          );
+          showInSnackBar(context, 'Missed data please try again');
         }
       });
     }
 
     return Scaffold(
-      body: isLoading
-          ? Container(
-              color: AppColors.M_isLoading_color,
-              child: Center(
-                  child: SizedBox(
-                height: 80,
-                width: 80,
-                child: CircularProgressIndicator(
-                  valueColor: new AlwaysStoppedAnimation<Color>(
-                      AppColors.M_app_main_color),
-                  strokeWidth: 1.5,
-                ),
-              )),
-            )
-          : Padding(
+      body: Padding(
               padding: const EdgeInsets.all(8.0),
               child: SingleChildScrollView(
                 child: GestureDetector(
@@ -351,8 +285,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     EdgeInsets.symmetric(
                                         vertical: height / 55)),
                                 backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        AppColors.M_app_main_color),
+                                MaterialStateProperty.all<Color>(
+                                    AppColors.M_app_main_color),
                                 minimumSize: MaterialStateProperty.all(
                                     Size(width / 10 * 9, height * 0.0580)),
                                 shape: MaterialStateProperty.all(

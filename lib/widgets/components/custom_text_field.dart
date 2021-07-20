@@ -6,19 +6,19 @@ import 'package:flutter_store/constants/app_color.dart';
 class CustomTextField extends StatelessWidget {
 
   final String labelText;
-  final IconData iconData;
+  final IconData? iconData;
   final TextEditingController controller;
   final bool isPassword ;
   final IconData? suffixIconData;
-  final VoidCallback visibilityOnTap;
+  final VoidCallback? visibilityOnTap;
 
   CustomTextField(
       {
         required this.labelText,
-        required this.iconData,
+        this.iconData,
         required this.controller,
         required this.isPassword,
-        required this.visibilityOnTap,
+        this.visibilityOnTap,
         this.suffixIconData,
       }
       );

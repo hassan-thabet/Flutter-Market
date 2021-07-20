@@ -5,6 +5,8 @@ import 'package:flutter_store/screens/login_screen.dart';
 import 'package:flutter_store/screens/register_screen.dart';
 import 'package:flutter_store/screens/splash_screen.dart';
 
+import 'constants/app_color.dart';
+
 main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -20,6 +22,9 @@ class MyApp extends StatelessWidget {
         HomeScreen.id : (context) => HomeScreen(),
       },
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+           scaffoldBackgroundColor : AppColors.M_background_color
+      ),
     );
   }
 }

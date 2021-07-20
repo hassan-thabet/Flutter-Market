@@ -8,6 +8,7 @@ import 'package:flutter_store/widgets/components/rate_bar.dart';
 Widget productComponent(Product product) {
 
   return Card(
+    elevation: 2,
     child: Container(
        width: 220,
       child: Column(

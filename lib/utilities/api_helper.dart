@@ -1,3 +1,4 @@
+
 class ApiHelper {
   // MAIN SERVER URL
   static const String MAIN_API_URL = "http://10.0.2.2:8000/api/";
@@ -6,6 +7,8 @@ class ApiHelper {
   // AUTH URLs
   static const String AUTH_LOGIN = MAIN_API_URL + 'auth/login';
   static const String AUTH_REGISTER = MAIN_API_URL + 'auth/register';
+
+  static const String SEARCH = MAIN_API_URL + 'search';
 
   static const String CATEGORIES = MAIN_API_URL + 'categories';
   static const String SUBCATEGORIES = MAIN_API_URL + 'category-subcategories';
@@ -16,4 +19,8 @@ class ApiHelper {
   static const String BRAND_PRODUCTS = MAIN_API_URL + 'brands';
 
   static const String CARTS = MAIN_API_URL + 'carts';
+  static const String ADD_TO_CART = MAIN_API_URL + 'add-to-cart';
+
+  static const String REMOVE_FROM_CARTS = MAIN_API_URL + 'remove-from-cart';
+  static const String DELETE_FROM_CARTS = MAIN_API_URL + 'delete-from-cart';
 }

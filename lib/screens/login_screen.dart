@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_store/api/authentication.dart';
 import 'package:flutter_store/constants/app_color.dart';
 import 'package:flutter_store/screens/register_screen.dart';
-import 'package:flutter_store/widgets/components/custom_dialog.dart';
 import 'package:flutter_store/widgets/components/custom_text_field.dart';
-
+import 'package:flutter_store/widgets/components/my_snack_bar.dart';
 import 'home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -17,87 +16,39 @@ class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  bool isLoading = false;
   bool visibility = false;
+
   @override
   Widget build(BuildContext context) {
     Authentication authentication = Authentication();
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+
     _onPressed() {
       setState(() {
-        isLoading = true;
         if (_emailController.text.trim().toLowerCase().isNotEmpty &&
             _passwordController.text.isNotEmpty) {
           authentication
               .login(_emailController.text, _passwordController.text)
               .whenComplete(() => {
-                    if (authentication.status)
+                    if (authentication.status != 200)
                       {
-                        Navigator.pushReplacementNamed(context, LoginScreen.id),
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) => CustomDialog(
-                            title: "Failed",
-                            description: "E-mail or password is incorrect",
-                            buttonText: "Ok",
-                            icon: Icon(
-                              Icons.clear,
-                              color: Colors.white,
-                              size: 40,
-                            ),
-                            buttonFunc: () {
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ),
-                        isLoading = false,
+                        showInSnackBar(context, 'error on email or password'),
                       }
                     else
                       {
                         Navigator.pushReplacementNamed(context, HomeScreen.id),
-                        isLoading = false,
+                        showInSnackBar(context, 'Welcome back'),
                       }
                   });
         } else {
-          isLoading = false;
-          showDialog(
-            context: context,
-            builder: (BuildContext context) => CustomDialog(
-              title: "Missed data in login",
-              description: "Here is missed data error",
-              buttonText: "Try again",
-              icon: Icon(
-                Icons.clear,
-                color: Colors.white,
-                size: 40,
-              ),
-              buttonFunc: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          );
+          showInSnackBar(context, 'Missed data please try again');
         }
       });
     }
 
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
-
     return Scaffold(
-      body: isLoading
-          ? Container(
-              color: AppColors.M_isLoading_color,
-              child: Center(
-                  child: SizedBox(
-                height: 80,
-                width: 80,
-                child: CircularProgressIndicator(
-                  valueColor: new AlwaysStoppedAnimation<Color>(
-                      AppColors.M_app_main_color),
-                  strokeWidth: 1.5,
-                ),
-              )),
-            )
-          : Padding(
+      body: Padding(
               padding: const EdgeInsets.all(8.0),
               child: SingleChildScrollView(
                 child: GestureDetector(
