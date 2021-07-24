@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_store/api/products_api.dart';
 import 'package:flutter_store/widgets/components/floating_search_bar.dart';
+
 
 
 class SearchTab extends StatefulWidget {
@@ -10,20 +10,22 @@ class SearchTab extends StatefulWidget {
 
 
 class _SearchTabState extends State<SearchTab> {
-  ProductsApi productsApi = new ProductsApi();
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      drawer: Drawer(),
+      resizeToAvoidBottomInset: true,
       body: Container(
         child: Stack(
           fit: StackFit.expand,
+          // alignment: AlignmentDirectional.topCenter,
           children: [
             buildFloatingSearchBar(context),
-
           ],
         ),
+
       ),
     );
   }

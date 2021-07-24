@@ -39,6 +39,7 @@ class _HomeTabState extends State<HomeTab> {
     }
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         centerTitle: true,
         leading: Icon(
@@ -201,9 +202,6 @@ class _HomeTabState extends State<HomeTab> {
                           }
                         }),
                   )),
-              // SizedBox(
-              //   height: height / 3,
-              // ),
             ],
           ),
         ],

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_store/models/brand.dart';
-import 'package:flutter_store/utilities/api_helper.dart';
+import 'package:flutter_store/constants/api_helper.dart';
 
 class BrandsApi {
   // Map<String, String> headers = {'Accept': 'application/json'};

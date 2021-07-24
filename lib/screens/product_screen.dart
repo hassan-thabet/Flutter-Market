@@ -3,7 +3,7 @@ import 'package:flutter_store/api/carts_api.dart';
 import 'package:flutter_store/constants/app_color.dart';
 import 'package:flutter_store/models/product.dart';
 import 'package:flutter_store/screens/login_screen.dart';
-import 'package:flutter_store/utilities/api_helper.dart';
+import 'package:flutter_store/constants/api_helper.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_store/widgets/components/custom_dialog.dart';
 import 'package:flutter_store/widgets/components/my_snack_bar.dart';
@@ -72,6 +72,7 @@ class _ProductScreenState extends State<ProductScreen> {
         onPressed: () {
           read();
         },
+        heroTag: 'product_screen',
         child: Icon(
           Icons.add_shopping_cart_rounded,
           color: Colors.white,

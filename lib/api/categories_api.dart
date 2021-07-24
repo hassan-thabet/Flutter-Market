@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:flutter_store/exceptions/exceptions.dart';
+import 'package:flutter_store/constants/exceptions.dart';
 import 'package:flutter_store/models/category.dart';
-import 'package:flutter_store/utilities/api_helper.dart';
+import 'package:flutter_store/constants/api_helper.dart';
 
 class CategoriesApi {
   Map<String, String> headers = {'Accept': 'application/json'};

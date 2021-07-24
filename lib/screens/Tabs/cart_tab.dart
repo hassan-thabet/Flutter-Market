@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_store/api/carts_api.dart';
 import 'package:flutter_store/constants/app_color.dart';
 import 'package:flutter_store/models/cart.dart';
-import 'package:flutter_store/utilities/api_helper.dart';
+import 'package:flutter_store/constants/api_helper.dart';
 import 'package:flutter_store/widgets/components/custom_dialog.dart';
-import 'package:flutter_store/widgets/components/loading_screen.dart';
+import 'package:flutter_store/widgets/components/init_loading_screen.dart';
 import 'package:flutter_store/widgets/components/my_snack_bar.dart';
 import 'package:flutter_store/widgets/connection/error.dart';
 import 'package:flutter_store/widgets/connection/loading.dart';
@@ -25,7 +25,7 @@ class _CartTabState extends State<CartTab> {
     double height = MediaQuery.of(context).size.height;
     final format = new NumberFormat("#,##0", "en_US");
 
-    return (isLoading) ? LoadingScreen() :  Scaffold(
+    return (isLoading) ? InitLoadingScreen() :  Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: Text(

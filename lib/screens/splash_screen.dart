@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_store/constants/app_color.dart';
 import 'package:flutter_store/screens/home_screen.dart';
@@ -20,18 +19,16 @@ class _SplashScreenState extends State<SplashScreen> {
     final key = 'authenticated';
     final value = preferences.get(key) ?? null;
     if (value == true) {
-      Navigator.of(context)
-          .pushNamedAndRemoveUntil(HomeScreen.id, (route) => false);
+
+      Navigator.pushReplacementNamed(context, HomeScreen.id);
     } else {
-      Navigator.of(context)
-          .pushNamedAndRemoveUntil(LoginScreen.id, (route) => false);
+      Navigator.pushReplacementNamed(context, LoginScreen.id);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    Timer(Duration(seconds: 4), () => read());
-
+    Timer(Duration(seconds: 2), () => read());
     return Scaffold(
       backgroundColor: AppColors.M_app_main_color,
       body: Container(
@@ -49,4 +46,6 @@ class _SplashScreenState extends State<SplashScreen> {
       ),
     );
   }
+
+
 }

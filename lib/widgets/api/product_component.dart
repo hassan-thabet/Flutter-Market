@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_store/constants/app_color.dart';
 import 'package:flutter_store/models/product.dart';
-import 'package:flutter_store/utilities/api_helper.dart';
+import 'package:flutter_store/constants/api_helper.dart';
 import 'package:flutter_store/widgets/components/rate_bar.dart';
 
 Widget productComponent(Product product) {
@@ -16,7 +16,11 @@ Widget productComponent(Product product) {
         children: <Widget>[
           Stack(
             children: [
-              Image.network(ApiHelper.MAIN_IMAGES_URL + product.images![0] , height: 200 ,width: double.infinity),
+              Image.network(
+                  ApiHelper.MAIN_IMAGES_URL + product.images![0],
+                  height: 200 ,
+                  width: double.infinity,
+              ),
               Align(
                   alignment: Alignment.topRight,
                   child: TextButton(
