@@ -1,8 +1,8 @@
 
 class ApiHelper {
   // MAIN SERVER URL
-  static const String MAIN_API_URL = "http://10.0.2.2:8000/api/";
-  static const String MAIN_IMAGES_URL = "http://10.0.2.2:8000/images/";
+  static const String MAIN_API_URL = "http://192.168.1.4:8000/api/";
+  static const String MAIN_IMAGES_URL = "http://192.168.1.4:8000/images/";
 
   // AUTH URLs
   static const String AUTH_LOGIN = MAIN_API_URL + 'auth/login';

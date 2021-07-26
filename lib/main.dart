@@ -1,4 +1,5 @@
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_store/bloc/login/login_bloc.dart';
@@ -6,9 +7,10 @@ import 'package:flutter_store/screens/home_screen.dart';
 import 'package:flutter_store/screens/login_screen.dart';
 import 'package:flutter_store/screens/register_screen.dart';
 import 'package:flutter_store/screens/splash_screen.dart';
-
+import 'bloc/register/register_bloc.dart';
 import 'bloc/search/search_bloc.dart';
 import 'constants/app_color.dart';
+
 
 main() => runApp(MyApp());
 
@@ -18,11 +20,11 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => LoginBloc()),
+        BlocProvider(create: (context) => RegisterBloc()),
         BlocProvider(create: (context) => SearchBloc()),
-
-
       ],
       child: MaterialApp(
+
         initialRoute: SplashScreen.id,
         routes:
         {
@@ -33,7 +35,8 @@ class MyApp extends StatelessWidget {
         },
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-             scaffoldBackgroundColor : AppColors.M_background_color
+             scaffoldBackgroundColor : AppColors.M_background_color,
+             platform: TargetPlatform.iOS,
         ),
       ),
     );

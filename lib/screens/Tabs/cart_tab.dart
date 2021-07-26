@@ -3,12 +3,13 @@ import 'package:flutter_store/api/carts_api.dart';
 import 'package:flutter_store/constants/app_color.dart';
 import 'package:flutter_store/models/cart.dart';
 import 'package:flutter_store/constants/api_helper.dart';
-import 'package:flutter_store/widgets/components/custom_dialog.dart';
-import 'package:flutter_store/widgets/components/init_loading_screen.dart';
-import 'package:flutter_store/widgets/components/my_snack_bar.dart';
-import 'package:flutter_store/widgets/connection/error.dart';
-import 'package:flutter_store/widgets/connection/loading.dart';
+import 'package:flutter_store/widgets/UI/custom_dialog.dart';
+import 'package:flutter_store/widgets/UI/init_loading_screen.dart';
+import 'package:flutter_store/widgets/UI/my_snack_bar.dart';
+import 'package:flutter_store/widgets/api/Error/error.dart';
+import 'package:flutter_store/widgets/api/Loading/cart_item_component_shimmer.dart';
 import 'package:intl/intl.dart';
+import 'package:shimmer/shimmer.dart';
 
 class CartTab extends StatefulWidget {
 
@@ -33,7 +34,6 @@ class _CartTabState extends State<CartTab> {
           style: TextStyle(
             color: AppColors.M_dark_text_color,
             fontFamily: 'Quicksand',
-            letterSpacing: 4,
           ),
         ),
         elevation: 0,
@@ -48,8 +48,21 @@ class _CartTabState extends State<CartTab> {
                   switch (snapshot.connectionState) {
                     case ConnectionState.none:
                     case ConnectionState.active:
-                    // case ConnectionState.waiting:
-                      return loading();
+                    case ConnectionState.waiting:
+                      return Shimmer.fromColors(
+                        baseColor: Colors.grey,
+                        highlightColor: Colors.grey.withAlpha(100),
+                        child: ListView.builder(
+                            shrinkWrap: true,
+                            primary: false,
+                            itemCount: 5,
+                            itemBuilder:
+                                (_,__) => Padding(
+                                  padding: const EdgeInsets.all(26),
+                                  child: CartItemComponentShimmer(),
+                                ),
+                              ),
+                      );
 
                     case ConnectionState.done:
                       if (snapshot.hasError) {
@@ -67,34 +80,36 @@ class _CartTabState extends State<CartTab> {
                         );
                       } else {
                         if (snapshot.hasData) {
-                          return ListView(
-                            children: [
-                              (snapshot.data!.cartItems!.length == 0)
-                                  ? Column(
-                                    children: [
-                                      Center(child: Image.asset('assets/images/empty_cart.png'),),
-                                      Text(
-                                        'Products you may like will appear here ',
-                                        style: TextStyle(
-                                          color: AppColors.M_dark_text_color,
-                                          fontFamily: 'Quicksand',
-                                        ),
-                                      )
-                                    ],
-                                  )
-                                  : ListView.builder(
-                                  shrinkWrap: true,
-                                  primary: false,
-                                  itemCount: snapshot.data!.cartItems!.length,
-                                  itemBuilder:
-                                      (BuildContext context, int position) {
-                                    return cartItemComponent(
-                                        snapshot.data!.cartItems![position]);
-                                  }),
-                            ],
+                          return Center(
+                            child: ListView(
+                              children: [
+                                (snapshot.data!.cartItems!.length == 0)
+                                    ? Column(
+                                      children: [
+                                        Center(child: Image.asset('assets/images/empty_cart.png'),),
+                                        Text(
+                                          'Products you may like will appear here ',
+                                          style: TextStyle(
+                                            color: AppColors.M_dark_text_color,
+                                            fontFamily: 'Quicksand',
+                                          ),
+                                        )
+                                      ],
+                                    )
+                                    : ListView.builder(
+                                    shrinkWrap: true,
+                                    primary: false,
+                                    itemCount: snapshot.data!.cartItems!.length,
+                                    itemBuilder:
+                                        (BuildContext context, int position) {
+                                      return cartItemComponent(
+                                          snapshot.data!.cartItems![position]);
+                                    }),
+                              ],
+                            ),
                           );
                         } else {
-                          return error('NO DATA');
+                          return error();
                         }
                       }
 
@@ -113,106 +128,105 @@ class _CartTabState extends State<CartTab> {
                     switch (snapshot.connectionState) {
                       case ConnectionState.none:
                       case ConnectionState.active:
-                      // case ConnectionState.waiting:
-                        return loading();
+                      case ConnectionState.waiting:
+                        return Container();
 
                       case ConnectionState.done:
                         if (snapshot.hasError) {
 
-                          return error('');
+                          return error();
                         } else {
                           if (snapshot.hasData) {
-                            print(snapshot.data!.total.toString());
                             return (snapshot.data!.cartItems!.length == 0)
                                 ? Container()
                                 : Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 22.0 , left: 22 , top: 8),
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        'Total : ',
-                                        style: TextStyle(
-                                          color: AppColors.M_dark_text_color,
-                                          decoration: TextDecoration.none,
-                                          fontFamily: 'Quicksand',
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                      Text(
-                                        format.format(snapshot.data!.total) + ' LE',
-                                        style: TextStyle(
-                                          color: AppColors.M_app_main_color,
-                                          decoration: TextDecoration.none,
-                                          fontFamily: 'Quicksand',
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                      Spacer(),
-                                      (snapshot.data!.total! < 500)
-                                          ? Text('')
-                                          : Text(
-                                              'FREE SHIPPING !',
-                                              style: TextStyle(
-                                                color: AppColors.M_dark_text_color,
-                                                decoration: TextDecoration.none,
-                                                fontFamily: 'Quicksand',
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 22 , left: 22 , top: 8 , bottom: 8),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-
-                                      TextButton(
-                                        style: ButtonStyle(
-                                          padding: MaterialStateProperty.all(
-                                              EdgeInsets.symmetric(
-                                                  vertical: height / 55)),
-                                          backgroundColor:
-                                          MaterialStateProperty.all<Color>(
-                                              AppColors.M_app_main_color),
-
-                                          shape: MaterialStateProperty.all(
-                                            RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(5),
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 22.0 , left: 22 , top: 8),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            'Total : ',
+                                            style: TextStyle(
+                                              color: AppColors.M_dark_text_color,
+                                              decoration: TextDecoration.none,
+                                              fontFamily: 'Quicksand',
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w500,
                                             ),
                                           ),
-                                        ),
-                                        onPressed: (){},
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              "Check Out ",
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                decoration: TextDecoration.none,
-                                                fontFamily: 'Quicksand',
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.w500,
+                                          Text(
+                                            format.format(snapshot.data!.total) + ' LE',
+                                            style: TextStyle(
+                                              color: AppColors.M_app_main_color,
+                                              decoration: TextDecoration.none,
+                                              fontFamily: 'Quicksand',
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                          Spacer(),
+                                          (snapshot.data!.total! < 500)
+                                              ? Text('')
+                                              : Text(
+                                                  'FREE SHIPPING !',
+                                                  style: TextStyle(
+                                                    color: AppColors.M_dark_text_color,
+                                                    decoration: TextDecoration.none,
+                                                    fontFamily: 'Quicksand',
+                                                    fontSize: 18,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 22 , left: 22 , top: 8 , bottom: 8),
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+
+                                          TextButton(
+                                            style: ButtonStyle(
+                                              padding: MaterialStateProperty.all(
+                                                  EdgeInsets.symmetric(
+                                                      vertical: height / 55)),
+                                              backgroundColor:
+                                              MaterialStateProperty.all<Color>(
+                                                  AppColors.M_app_main_color),
+
+                                              shape: MaterialStateProperty.all(
+                                                RoundedRectangleBorder(
+                                                  borderRadius: BorderRadius.circular(5),
+                                                ),
                                               ),
                                             ),
-                                            Text(' ',),
-                                          ],
-                                        ),
+                                            onPressed: (){},
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  "Check Out ",
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    decoration: TextDecoration.none,
+                                                    fontFamily: 'Quicksand',
+                                                    fontSize: 18,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                                Text(' ',),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
-                                ),
-                              ],
+                                    ),
+                                  ],
                             );
                           } else {
-                            return error('NO DATA');
+                            return error();
                           }
                         }
 

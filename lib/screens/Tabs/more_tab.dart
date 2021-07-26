@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_store/constants/app_color.dart';
-import 'package:flutter_store/widgets/components/custom_dialog.dart';
-import 'package:flutter_store/widgets/components/custom_list_tile.dart';
+import 'package:flutter_store/widgets/UI/custom_dialog.dart';
+import 'package:flutter_store/widgets/UI/custom_list_tile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../login_screen.dart';
 
-class MoreTab extends StatefulWidget {
-  @override
-  _MoreTabState createState() => _MoreTabState();
-}
-
-class _MoreTabState extends State<MoreTab> {
+class MoreTab extends StatelessWidget {
+  const MoreTab({Key? key}) : super(key: key);
 
 
   @override
@@ -27,7 +23,7 @@ class _MoreTabState extends State<MoreTab> {
           style: TextStyle(
             color: AppColors.M_dark_text_color,
             fontFamily: 'Quicksand',
-            letterSpacing: 4,
+
           ),
         ),
         elevation: 0,
@@ -143,7 +139,7 @@ class _MoreTabState extends State<MoreTab> {
                           CustomListTile(
                             Icons.logout_outlined,
                             'Logout',
-                              () async {
+                                () async {
                               final preferences = await SharedPreferences.getInstance();
                               final key = 'authenticated';
                               final value = preferences.get(key) ?? null;

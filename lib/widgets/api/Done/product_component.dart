@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_store/constants/app_color.dart';
 import 'package:flutter_store/models/product.dart';
 import 'package:flutter_store/constants/api_helper.dart';
-import 'package:flutter_store/widgets/components/rate_bar.dart';
+import 'package:flutter_store/widgets/UI/rate_bar.dart';
 
 Widget productComponent(Product product) {
 
@@ -24,7 +24,9 @@ Widget productComponent(Product product) {
               Align(
                   alignment: Alignment.topRight,
                   child: TextButton(
-                      onPressed: (){}, child: Icon(Icons.favorite_border_outlined , color: AppColors.M_app_main_color,),
+                      onPressed: (){},
+                      child: Icon(Icons.favorite_border_outlined ,
+                      color: AppColors.M_app_main_color,),
                   )
               ),
             ],
@@ -79,6 +81,7 @@ Widget productComponent(Product product) {
               ),
             ),
           ),
+
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: SizedBox(

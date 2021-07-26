@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_store/constants/app_color.dart';
 import 'package:flutter_store/screens/Tabs/home_tab.dart';
-import 'package:flutter_store/screens/Tabs/search_tab.dart';
+import 'package:flutter_store/screens/Tabs/notifications_tab.dart';
 import 'Tabs/cart_tab.dart';
 import 'Tabs/more_tab.dart';
 import 'Tabs/profile_tab.dart';
@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final List<Widget> _screens = [
     HomeTab(),
-    SearchTab(),
+    NotificationsTab(),
     CartTab(),
     ProfileTab(),
     MoreTab(),
@@ -49,14 +49,15 @@ class _HomeScreenState extends State<HomeScreen> {
         unselectedLabelStyle: TextStyle(
           fontFamily: 'Quicksand',
         ),
+        elevation: 16,
         items: [
           BottomNavigationBarItem(
             label: 'Home',
-            icon: Icon(Icons.home_filled),
+            icon: Icon(Icons.home_outlined),
           ),
           BottomNavigationBarItem(
-            label: 'Search',
-            icon: Icon(Icons.search),
+            label: 'Notifications',
+            icon: Icon(Icons.notifications_none),
           ),
           BottomNavigationBarItem(
             label: 'Cart',

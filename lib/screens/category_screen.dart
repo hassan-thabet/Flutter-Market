@@ -7,34 +7,31 @@ import 'package:flutter_store/models/brand.dart';
 import 'package:flutter_store/models/category.dart';
 import 'package:flutter_store/models/subcategory.dart';
 import 'package:flutter_store/screens/ProductsScreens/subcategory_products_screen.dart';
-import 'package:flutter_store/widgets/api/brand_component.dart';
-import 'package:flutter_store/widgets/api/subcategory_component.dart';
-import 'package:flutter_store/widgets/connection/error.dart';
-import 'package:flutter_store/widgets/connection/loading.dart';
-
+import 'package:flutter_store/widgets/Api/NoData/no_data.dart';
+import 'package:flutter_store/widgets/api/Done/brand_component.dart';
+import 'package:flutter_store/widgets/api/Done/subcategory_component.dart';
+import 'package:flutter_store/widgets/api/Loading/brand_component_shimmer.dart';
+import 'package:flutter_store/widgets/api/Loading/subcategory_component_shimmer.dart';
+import 'package:flutter_store/widgets/api/Error/error.dart';
+import 'package:shimmer/shimmer.dart';
 import 'ProductsScreens/brand_products.dart';
 
-class CategoryScreen extends StatefulWidget {
-  final Category category;
 
+
+class CategoryScreen extends StatelessWidget {
+  final Category category;
   CategoryScreen({Key? key, required this.category}) : super(key: key);
 
-  @override
-  _CategoryScreenState createState() => _CategoryScreenState();
-}
+  final CategoriesApi categoriesApi = CategoriesApi();
+  final SubcategoriesApi subcategoriesApi = SubcategoriesApi();
+  final BrandsApi brandsApi = BrandsApi();
 
-CategoriesApi categoriesApi = CategoriesApi();
-SubcategoriesApi subcategoriesApi = SubcategoriesApi();
-BrandsApi brandsApi = BrandsApi();
-
-class _CategoryScreenState extends State<CategoryScreen> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
-    void _goToSubcategoryProductsScreen(
-        Subcategory subcategory, BuildContext context) {
+    void _goToSubcategoryProductsScreen(Subcategory subcategory, BuildContext context) {
       Navigator.push(context, MaterialPageRoute(builder: (context) {
         return SubcategoryProductsScreen(subcategory: subcategory);
       }));
@@ -53,7 +50,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
         ),
         centerTitle: true,
         title: Text(
-          widget.category.categoryName!,
+          category.categoryName!,
           style: TextStyle(
             color: AppColors.M_dark_text_color,
             fontFamily: 'Quicksand',
@@ -94,25 +91,34 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     width: width,
                     child: FutureBuilder(
                         future: brandsApi
-                            .fetchBrands(widget.category.id.toString()),
+                            .fetchBrands(category.id.toString()),
                         builder: (BuildContext context,
                             AsyncSnapshot<List<Brand>> snapShot) {
                           switch (snapShot.connectionState) {
                             case ConnectionState.none:
-                              return error('nothing happened');
-
                             case ConnectionState.waiting:
-                              return loading();
-
                             case ConnectionState.active:
-                              return loading();
 
+                            return Shimmer.fromColors(
+                              baseColor: Colors.grey,
+                              highlightColor: Colors.grey.withAlpha(100),
+                              child: ListView.builder(
+                                  scrollDirection : Axis.horizontal,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  itemCount: 6,
+                                  shrinkWrap: true,
+                                  itemBuilder: (_, __) => Padding(
+                                    padding: const EdgeInsets.all(8),
+                                    child: BrandComponentShimmer(),
+                                  )
+                              ),
+                            );
                             case ConnectionState.done:
                               if (snapShot.hasError) {
-                                return error(snapShot.error.toString());
+                                return error();
                               } else {
                                 if (snapShot.data!.length < 1) {
-                                  return error(
+                                  return noData(
                                       'Some brands will be included soon');
                                 } else {
                                   return ListView.builder(
@@ -161,25 +167,35 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     width: width,
                     child: FutureBuilder(
                         future: subcategoriesApi
-                            .fetchSubcategories(widget.category.id.toString()),
+                            .fetchSubcategories(category.id.toString()),
                         builder: (BuildContext context,
                             AsyncSnapshot<List<Subcategory>> snapShot) {
                           switch (snapShot.connectionState) {
                             case ConnectionState.none:
-                              return error('nothing happened');
-
                             case ConnectionState.waiting:
-                              return loading();
-
                             case ConnectionState.active:
-                              return loading();
+                              return Shimmer.fromColors(
+                                baseColor: Colors.grey,
+                                highlightColor: Colors.grey.withAlpha(100),
+                                child: ListView.builder(
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemCount: 6,
+                                    shrinkWrap: true,
+                                    itemBuilder: (_, __) => Padding(
+                                      padding: const EdgeInsets.all(8),
+                                      child: SubcategoryComponentShimmer(),
+                                    )
+                                ),
+                              );
+
 
                             case ConnectionState.done:
                               if (snapShot.hasError) {
-                                return error(snapShot.error.toString());
+                                return error();
                               } else {
-                                if (!snapShot.hasData) {
-                                  return error('No data is recorded on DB');
+                                if (snapShot.data!.length < 1) {
+                                  return noData(
+                                      'Some Subcategories will be included soon');
                                 } else {
                                   return ListView.builder(
                                       physics: NeverScrollableScrollPhysics(),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_store/constants/app_color.dart';
-import 'package:flutter_store/widgets/components/custom_list_tile.dart';
+import 'package:flutter_store/widgets/UI/custom_list_tile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileTab extends StatefulWidget {
@@ -9,12 +9,6 @@ class ProfileTab extends StatefulWidget {
 }
 
 class _ProfileTabState extends State<ProfileTab> {
-
-  // Future<SharedPreferences> preferences = SharedPreferences.getInstance();
-  // late String firstName;
-  // late Future<String> lastName ;
-  // late Future<String> email;
-
 
   String firstName = '';
   String lastName = '';
@@ -27,10 +21,10 @@ class _ProfileTabState extends State<ProfileTab> {
       firstName = (preferences.getString('first_name') ?? 'Guest');
       lastName = (preferences.getString('last_name') ?? 'User');
       email = (preferences.getString('email') ?? 'Email');
-      image = (preferences.getString('image') ?? 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png');
+      image = (preferences.getString('image') ??
+          'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png');
     });
   }
-
 
   @override
   void initState() {
@@ -44,6 +38,7 @@ class _ProfileTabState extends State<ProfileTab> {
     double height = MediaQuery.of(context).size.height;
 
 
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -52,7 +47,6 @@ class _ProfileTabState extends State<ProfileTab> {
           style: TextStyle(
             color: AppColors.M_dark_text_color,
             fontFamily: 'Quicksand',
-            letterSpacing: 4,
           ),
         ),
         elevation: 0,
@@ -74,7 +68,6 @@ class _ProfileTabState extends State<ProfileTab> {
                     SizedBox(
                       width: width / 15,
                     ),
-
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -143,9 +136,12 @@ class _ProfileTabState extends State<ProfileTab> {
                         ),
                         child: Column(
                           children: [
-                            CustomListTile(Icons.favorite_border_outlined, "My favourites", (){}),
-                            CustomListTile(Icons.view_list_sharp , "Orders", (){}),
-                            CustomListTile(Icons.shopping_basket_outlined, "Finished Orders", (){})
+                            CustomListTile(Icons.favorite_border_outlined,
+                                "My favourites", () {}),
+                            CustomListTile(
+                                Icons.view_list_sharp, "Orders", () {}),
+                            CustomListTile(Icons.shopping_basket_outlined,
+                                "Finished Orders", () {})
 
                             // Divider(),
                           ],
@@ -195,10 +191,14 @@ class _ProfileTabState extends State<ProfileTab> {
                         ),
                         child: Column(
                           children: [
-                            CustomListTile(Icons.share_outlined, "Invite Friends", (){}),
-                            CustomListTile(Icons.headset_mic_outlined, "Customer Support", (){}),
-                            CustomListTile(Icons.star_border, "Rate Our App", (){}),
-                            CustomListTile(Icons.description, "Make a Suggestion", (){})
+                            CustomListTile(
+                                Icons.share_outlined, "Invite Friends", () {}),
+                            CustomListTile(Icons.headset_mic_outlined,
+                                "Customer Support", () {}),
+                            CustomListTile(
+                                Icons.star_border, "Rate Our App", () {}),
+                            CustomListTile(
+                                Icons.description, "Make a Suggestion", () {})
                           ],
                         ),
                       ),

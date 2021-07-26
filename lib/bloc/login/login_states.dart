@@ -9,4 +9,3 @@ class LoginEmptyState extends LoginStates{}
 
 
 class LoginVisibilityState extends LoginStates{}
-class LoginChangeVisibilityState extends LoginStates{}
