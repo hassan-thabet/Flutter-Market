@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_store/constants/app_color.dart';
+import 'package:flutter_store/constants/api_helper.dart';
 import 'package:flutter_store/models/category.dart';
 
 Widget categoryComponent(Category category) {
@@ -10,16 +10,16 @@ Widget categoryComponent(Category category) {
         Flexible(
           child: CircleAvatar(
             backgroundColor: Colors.white,
-            radius: 45,
-            child: Image.network(category.imageLink! , width: 45, height: 45, color: AppColors.M_app_main_color),
-            // backgroundImage: NetworkImage(category.imageLink),
+            radius: 35,
+            backgroundImage: NetworkImage(ApiHelper.MAIN_CATEGORIES_IMAGES_URL + category.imageLink!),
           ),
         ),
         SizedBox(height: 5),
         Text(
           category.categoryName!,
           style : TextStyle(
-          fontFamily: 'Quicksand')
+          fontFamily: 'Quicksand'),
+          maxLines: 1,
           ),
       ],
     ),

@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_store/bloc/login/login_bloc.dart';
+import 'package:flutter_store/bloc/product/product_bloc.dart';
 import 'package:flutter_store/screens/home_screen.dart';
 import 'package:flutter_store/screens/login_screen.dart';
 import 'package:flutter_store/screens/register_screen.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => LoginBloc()),
         BlocProvider(create: (context) => RegisterBloc()),
         BlocProvider(create: (context) => SearchBloc()),
+        BlocProvider(create: (context) => ProductBloc()),
       ],
       child: MaterialApp(
 

@@ -76,7 +76,9 @@ Widget productComponent(Product product) {
                       fontFamily: 'Quicksand',
                     ),
                   ),
-                  RateBar(),
+                  (product.rateAvg != null)
+                      ? RateBar(double.parse(product.rateAvg!.toString()))
+                      : Text('Discount 10%' , style: TextStyle(color: Colors.red),)
                 ],
               ),
             ),

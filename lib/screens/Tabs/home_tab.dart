@@ -165,6 +165,7 @@ class HomeTab extends StatelessWidget {
                                       case ConnectionState.none:
                                       case ConnectionState.waiting:
                                       case ConnectionState.active:
+
                                         return Shimmer.fromColors(
                                             baseColor: Colors.grey,
                                             highlightColor: Colors.grey.withAlpha(100),
@@ -184,7 +185,9 @@ class HomeTab extends StatelessWidget {
                                             return noData(
                                                 'No data is recorded on DB');
                                           } else {
-                                            return ListView.builder(
+                                            return
+
+                                              ListView.builder(
                                                 scrollDirection: Axis.horizontal,
                                                 itemCount: snapShot.data!.length,
                                                 itemBuilder: (context, position) {
@@ -199,6 +202,7 @@ class HomeTab extends StatelessWidget {
                                                           snapShot
                                                               .data![position]));
                                                 });
+
                                           }
                                         }
                                     }
@@ -257,7 +261,8 @@ class HomeTab extends StatelessWidget {
 
                                       case ConnectionState.done:
                                         if (snapShot.hasError) {
-                                          return error();
+                                          // return error();
+                                          return Text(snapShot.error.toString());
                                         } else {
                                           if (!snapShot.hasData) {
                                             return noData(

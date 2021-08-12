@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+
 class RateBar extends StatelessWidget {
-  const RateBar({
-    Key? key,
-  }) : super(key: key);
+
+  var rate;
+  RateBar(this.rate);
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Icon(Icons.star , color: Colors.amberAccent, size: 20,),
-        Icon(Icons.star, color: Colors.amberAccent,size: 20,),
-        Icon(Icons.star, color: Colors.amberAccent,size: 20,),
-        Icon(Icons.star_half, color: Colors.amberAccent,size: 20,),
-        Icon(Icons.star_border, color: Colors.amberAccent , size: 20),
-      ],
+    return RatingBarIndicator(
+      rating: rate!,
+      itemBuilder: (context, index) => Icon(
+        Icons.star,
+        color: Colors.amber,
+      ),
+      itemCount: 5,
+      itemSize: 15.0,
+      direction: Axis.horizontal,
     );
   }
 }

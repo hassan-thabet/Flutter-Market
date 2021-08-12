@@ -1,8 +1,9 @@
 
 class ApiHelper {
   // MAIN SERVER URL
-  static const String MAIN_API_URL = "http://192.168.1.4:8000/api/";
-  static const String MAIN_IMAGES_URL = "http://192.168.1.4:8000/images/";
+  static const String MAIN_API_URL = "http://192.168.1.2:8000/api/";
+  static const String MAIN_IMAGES_URL = "http://192.168.1.2:8000/images/";
+  static const String MAIN_CATEGORIES_IMAGES_URL = "http://192.168.1.2:8000/categories-images/";
 
   // AUTH URLs
   static const String AUTH_LOGIN = MAIN_API_URL + 'auth/login';
@@ -15,6 +16,8 @@ class ApiHelper {
   static const String BRANDS = MAIN_API_URL + 'category-brands';
 
   static const String PRODUCTS = MAIN_API_URL + 'products';
+  static const String PRODUCT_REVIEWS = MAIN_API_URL + 'product-reviews';
+  static const String CREATE_REVIEW = MAIN_API_URL + 'create-review';
   static const String SUBCATEGORY_PRODUCTS = MAIN_API_URL + 'subcategories';
   static const String BRAND_PRODUCTS = MAIN_API_URL + 'brands';
 
